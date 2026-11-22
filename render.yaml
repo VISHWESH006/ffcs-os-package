@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ffcs-os-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: PYTHON_BIN
+        value: /opt/venv/bin/python
+      - key: WORKSPACE_ROOT
+        value: /app
+      - key: FFCS_STORE_PATH
+        value: /var/data/ffcs_store.json
+      - key: CORS_ORIGINS
+        sync: false
+      - key: FIREBASE_PROJECT_ID
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false

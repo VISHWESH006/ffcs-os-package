@@ -1,0 +1,2040 @@
+{
+  "schemaVersion": "1.5.0",
+  "source": {
+    "system": "VTOP",
+    "campus": "VIT Bhopal University (synthetic test fixture)",
+    "verifiedOrigin": null,
+    "extensionVersion": "1.1.0",
+    "exportedAt": "2026-11-15T08:00:00Z",
+    "syntheticFixture": true,
+    "description": "Fictional planner test data. This file does not represent real VTOP course offerings."
+  },
+  "importSession": {
+    "sessionId": "ses_synthetic_student_planner_01",
+    "startedAt": "2026-11-15T08:00:00Z",
+    "completedAt": "2026-11-15T08:00:00Z",
+    "totalImportAttempts": 1,
+    "totalCourses": 14,
+    "totalOfferings": 80,
+    "totalPossibleMatches": 0
+  },
+  "pageHistory": [
+    {
+      "attemptIndex": 1,
+      "pageTitle": "Synthetic Student Planner Test Fixture",
+      "sanitizedUrl": null,
+      "category": "SYNTHETIC TEST FIXTURE",
+      "importedAt": "2026-11-15T08:00:00Z",
+      "metrics": {
+        "domRowsDetected": 80,
+        "rowsScanned": 80,
+        "rowsAccepted": 80,
+        "rowsRejected": 0,
+        "rowsSkipped": 0,
+        "duplicateRows": 0,
+        "incompleteRows": 9,
+        "offeringsExtracted": 80,
+        "offeringsAdded": 80,
+        "offeringsUpdated": 0,
+        "offeringsUnchanged": 0,
+        "rejectionReasons": {}
+      }
+    }
+  ],
+  "courses": [
+    {
+      "courseCode": "CSE9101",
+      "courseName": "Applied Algorithms",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-2-0-4",
+      "credits": 4,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "CSE9101",
+          "offeringId": "[\"CSE9101\",\"THEORY\",[\"A11\",\"A12\"],\"SUCHISMITA PATRA\",\"AB02-415\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "SUCHISMITA PATRA",
+          "venue": "AB02-415",
+          "building": null,
+          "room": null,
+          "availableSeats": 24,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9101",
+          "offeringId": "[\"CSE9101\",\"THEORY\",[\"A11\",\"A12\"],\"ARUNA J\",\"AB02-417\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "ARUNA J",
+          "venue": "AB02-417",
+          "building": null,
+          "room": null,
+          "availableSeats": 18,
+          "totalSeats": null,
+          "classStatus": null,
+          "missingFields": [
+            "totalSeats",
+            "classStatus"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9101",
+          "offeringId": "[\"CSE9101\",\"THEORY\",[\"A11\",\"B11\"],\"DIP MUKHERJEE\",\"AB-403\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+B11",
+          "slots": [
+            "A11",
+            "B11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "DIP MUKHERJEE",
+          "venue": "AB-403",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9101",
+          "offeringId": "[\"CSE9101\",\"THEORY\",[\"D11\",\"E11\"],\"HARISH CHANDRA\",\"AB02-103\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D11+E11",
+          "slots": [
+            "D11",
+            "E11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "HARISH CHANDRA",
+          "venue": "AB02-103",
+          "building": null,
+          "room": null,
+          "availableSeats": 12,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9101",
+          "offeringId": "[\"CSE9101\",\"THEORY\",[\"A13\"],\"ENAGANDULA PRASAD\",\"CR-011\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A13",
+          "slots": [
+            "A13"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "ENAGANDULA PRASAD",
+          "venue": "CR-011",
+          "building": null,
+          "room": null,
+          "availableSeats": null,
+          "totalSeats": 40,
+          "classStatus": "Open",
+          "missingFields": [
+            "availableSeats"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9101",
+          "offeringId": "[\"CSE9101\",\"THEORY\",[\"A14\"],\"DILEEP KUMAR\",\"AB-415\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A14",
+          "slots": [
+            "A14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "DILEEP KUMAR",
+          "venue": "AB-415",
+          "building": null,
+          "room": null,
+          "availableSeats": 63,
+          "totalSeats": 75,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9101",
+          "offeringId": "[\"CSE9101\",\"THEORY\",[\"A11\",\"A12\",\"A13\"],\"MAYANK SHARMA\",\"AB-429\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12+A13",
+          "slots": [
+            "A11",
+            "A12",
+            "A13"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "MAYANK SHARMA",
+          "venue": "AB-429",
+          "building": null,
+          "room": null,
+          "availableSeats": "N/A",
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [
+            "availableSeats"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9101",
+          "offeringId": "[\"CSE9101\",\"THEORY\",[\"B11\",\"B12\"],\"DONDHU HARISH BABU\",\"AB-420\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B11+B12",
+          "slots": [
+            "B11",
+            "B12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "DONDHU HARISH BABU",
+          "venue": "AB-420",
+          "building": null,
+          "room": null,
+          "availableSeats": 35,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "CSE9102",
+      "courseName": "Database Systems",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-2-0-4",
+      "credits": 4,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "CSE9102",
+          "offeringId": "[\"CSE9102\",\"THEORY\",[\"A11\",\"A12\"],\"ANUPAM SEN\",\"AB-501\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "ANUPAM SEN",
+          "venue": "AB-501",
+          "building": null,
+          "room": null,
+          "availableSeats": 45,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9102",
+          "offeringId": "[\"CSE9102\",\"THEORY\",[\"B11\",\"B12\"],\"ANIL KUMAR SHUKLA\",\"AB02-419\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B11+B12",
+          "slots": [
+            "B11",
+            "B12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "ANIL KUMAR SHUKLA",
+          "venue": "AB02-419",
+          "building": null,
+          "room": null,
+          "availableSeats": 56,
+          "totalSeats": 70,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9102",
+          "offeringId": "[\"CSE9102\",\"THEORY\",[\"C11\",\"C12\"],\"PRASHANT KUMAR PANDEY\",\"AB02-324\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C11+C12",
+          "slots": [
+            "C11",
+            "C12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "PRASHANT KUMAR PANDEY",
+          "venue": "AB02-324",
+          "building": null,
+          "room": null,
+          "availableSeats": 27,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9102",
+          "offeringId": "[\"CSE9102\",\"THEORY\",[\"D11\",\"E11\"],\"MUNIYAPPAN M\",\"AB-303\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D11+E11",
+          "slots": [
+            "D11",
+            "E11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "MUNIYAPPAN M",
+          "venue": "AB-303",
+          "building": null,
+          "room": null,
+          "availableSeats": 19,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9102",
+          "offeringId": "[\"CSE9102\",\"THEORY\",[\"A14\",\"D11\"],\"ANKIT FARKYA\",\"AB-331\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A14+D11",
+          "slots": [
+            "A14",
+            "D11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "ANKIT FARKYA",
+          "venue": "AB-331",
+          "building": null,
+          "room": null,
+          "availableSeats": 9,
+          "totalSeats": 40,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9102",
+          "offeringId": "[\"CSE9102\",\"THEORY\",[\"A11\",\"A12\",\"A13\"],\"DHARMALINGAMM\",\"AB-101\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12+A13",
+          "slots": [
+            "A11",
+            "A12",
+            "A13"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "DHARMALINGAMM",
+          "venue": "AB-101",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9102",
+          "offeringId": "[\"CSE9102\",\"THEORY\",[\"C11\",\"C12\",\"C13\"],\"SANTOSH KUMAR BHAL\",\"AB02-320\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C11+C12+C13",
+          "slots": [
+            "C11",
+            "C12",
+            "C13"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "SANTOSH KUMAR BHAL",
+          "venue": "AB02-320",
+          "building": null,
+          "room": null,
+          "availableSeats": 41,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9102",
+          "offeringId": "[\"CSE9102\",\"THEORY\",[\"B21\",\"E14\"],\"SUPRIYA KUMAR PAUL\",\"AB-128\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B21+E14",
+          "slots": [
+            "B21",
+            "E14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "SUPRIYA KUMAR PAUL",
+          "venue": "AB-128",
+          "building": null,
+          "room": null,
+          "availableSeats": 14,
+          "totalSeats": 40,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "MAT9101",
+      "courseName": "Discrete Mathematics",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-1-0-0-4",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "MAT9101",
+          "offeringId": "[\"MAT9101\",\"THEORY\",[\"B11\",\"B12\"],\"HEMANTA KALITA\",\"AB02-423\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B11+B12",
+          "slots": [
+            "B11",
+            "B12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "HEMANTA KALITA",
+          "venue": "AB02-423",
+          "building": null,
+          "room": null,
+          "availableSeats": 32,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "MAT9101",
+          "offeringId": "[\"MAT9101\",\"THEORY\",[\"C11\",\"C12\"],\"THILAGAVATHI A\",\"AB-431\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C11+C12",
+          "slots": [
+            "C11",
+            "C12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "THILAGAVATHI A",
+          "venue": "AB-431",
+          "building": null,
+          "room": null,
+          "availableSeats": 18,
+          "totalSeats": 50,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "MAT9101",
+          "offeringId": "[\"MAT9101\",\"THEORY\",[\"F11\",\"F12\"],\"ANANT KANT SHUKLA\",\"AB-513\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "F11+F12",
+          "slots": [
+            "F11",
+            "F12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "ANANT KANT SHUKLA",
+          "venue": "AB-513",
+          "building": null,
+          "room": null,
+          "availableSeats": 12,
+          "totalSeats": 40,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "MAT9101",
+          "offeringId": "[\"MAT9101\",\"THEORY\",[\"A21\",\"A22\",\"A23\"],\"EZHILARASAN P\",\"AB-502\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A21+A22+A23",
+          "slots": [
+            "A21",
+            "A22",
+            "A23"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "EZHILARASAN P",
+          "venue": "AB-502",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "MAT9101",
+          "offeringId": "[\"MAT9101\",\"THEORY\",[\"C11\",\"C12\",\"C13\"],\"GIRU P\",\"AB-317\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C11+C12+C13",
+          "slots": [
+            "C11",
+            "C12",
+            "C13"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "GIRU P",
+          "venue": "AB-317",
+          "building": null,
+          "room": null,
+          "availableSeats": 53,
+          "totalSeats": 70,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "MAT9101",
+          "offeringId": "[\"MAT9101\",\"THEORY\",[\"B21\",\"E14\"],\"SAURABH KUMAR MAURYA\",\"AB02-418\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B21+E14",
+          "slots": [
+            "B21",
+            "E14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "SAURABH KUMAR MAURYA",
+          "venue": "AB02-418",
+          "building": null,
+          "room": null,
+          "availableSeats": 8,
+          "totalSeats": 40,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "MAT9101",
+          "offeringId": "[\"MAT9101\",\"THEORY\",[\"A11\",\"A12\",\"A13\"],\"AJAY KUMAR BHURJEE\",\"AB-503\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12+A13",
+          "slots": [
+            "A11",
+            "A12",
+            "A13"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "AJAY KUMAR BHURJEE",
+          "venue": "AB-503",
+          "building": null,
+          "room": null,
+          "availableSeats": null,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [
+            "availableSeats"
+          ],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "CSE9103",
+      "courseName": "Operating Systems",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": null,
+      "credits": 4,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "CSE9103",
+          "offeringId": "[\"CSE9103\",\"THEORY\",[\"A21\",\"A22\"],\"SUMAN MAITI\",\"AB-023\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A21+A22",
+          "slots": [
+            "A21",
+            "A22"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "SUMAN MAITI",
+          "venue": "AB-023",
+          "building": null,
+          "room": null,
+          "availableSeats": 28,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9103",
+          "offeringId": "[\"CSE9103\",\"THEORY\",[\"D21\",\"D22\"],\"ABHISHEK\",\"AR-102\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D21+D22",
+          "slots": [
+            "D21",
+            "D22"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "ABHISHEK",
+          "venue": "AR-102",
+          "building": null,
+          "room": null,
+          "availableSeats": 44,
+          "totalSeats": 70,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9103",
+          "offeringId": "[\"CSE9103\",\"THEORY\",[\"A14\",\"D11\"],\"PRIYANKA\",\"AB02-017\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A14+D11",
+          "slots": [
+            "A14",
+            "D11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "PRIYANKA",
+          "venue": "AB02-017",
+          "building": null,
+          "room": null,
+          "availableSeats": 6,
+          "totalSeats": 40,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9103",
+          "offeringId": "[\"CSE9103\",\"THEORY\",[\"B14\",\"B23\",\"D21\"],\"KUMAR ABHISHEK\",\"AB-230\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B14+B23+D21",
+          "slots": [
+            "B14",
+            "B23",
+            "D21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "KUMAR ABHISHEK",
+          "venue": "AB-230",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9103",
+          "offeringId": "[\"CSE9103\",\"THEORY\",[\"C21\"],\"ADNAN ABBASI\",\"AB02-019\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C21",
+          "slots": [
+            "C21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "ADNAN ABBASI",
+          "venue": "AB02-019",
+          "building": null,
+          "room": null,
+          "availableSeats": 55,
+          "totalSeats": 70,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9103",
+          "offeringId": "[\"CSE9103\",\"THEORY\",[\"E21\"],\"BUVANESWARI P R\",null]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "E21",
+          "slots": [
+            "E21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "BUVANESWARI P R",
+          "venue": null,
+          "building": null,
+          "room": null,
+          "availableSeats": null,
+          "totalSeats": null,
+          "classStatus": null,
+          "missingFields": [
+            "venue",
+            "availableSeats",
+            "totalSeats",
+            "classStatus"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9103",
+          "offeringId": "[\"CSE9103\",\"THEORY\",[\"A14\"],\"MITHUN SINGH AHIRWAR\",\"CR-015\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A14",
+          "slots": [
+            "A14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "MITHUN SINGH AHIRWAR",
+          "venue": "CR-015",
+          "building": null,
+          "room": null,
+          "availableSeats": 33,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "CSE9103",
+          "offeringId": "[\"CSE9103\",\"THEORY\",[\"F11\",\"F12\"],\"TRAPTI SHARMA\",\"CR-003\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "F11+F12",
+          "slots": [
+            "F11",
+            "F12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "TRAPTI SHARMA",
+          "venue": "CR-003",
+          "building": null,
+          "room": null,
+          "availableSeats": 70,
+          "totalSeats": 75,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": [
+        "courseStructure"
+      ]
+    },
+    {
+      "courseCode": "SYN9201",
+      "courseName": "Graph Search Methods",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9201",
+          "offeringId": "[\"SYN9201\",\"THEORY\",[\"A11\",\"A12\"],\"FICTIONAL FACULTY ALPHA\",\"AB02-201\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY ALPHA",
+          "venue": "AB02-201",
+          "building": null,
+          "room": null,
+          "availableSeats": 18,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9201",
+          "offeringId": "[\"SYN9201\",\"THEORY\",[\"A11\",\"A12\"],\"FICTIONAL FACULTY BETA\",\"AB02-202\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY BETA",
+          "venue": "AB02-202",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9201",
+          "offeringId": "[\"SYN9201\",\"THEORY\",[\"A11\",\"A12\"],\"FICTIONAL FACULTY GAMMA\",\"AB02-203\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY GAMMA",
+          "venue": "AB02-203",
+          "building": null,
+          "room": null,
+          "availableSeats": null,
+          "totalSeats": null,
+          "classStatus": null,
+          "missingFields": [
+            "availableSeats",
+            "totalSeats"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9201",
+          "offeringId": "[\"SYN9201\",\"THEORY\",[\"B11\",\"B12\"],\"FICTIONAL FACULTY DELTA\",\"AB02-204\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B11+B12",
+          "slots": [
+            "B11",
+            "B12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY DELTA",
+          "venue": "AB02-204",
+          "building": null,
+          "room": null,
+          "availableSeats": 12,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9201",
+          "offeringId": "[\"SYN9201\",\"THEORY\",[\"C21\"],\"FICTIONAL FACULTY EPSILON\",\"AB02-205\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C21",
+          "slots": [
+            "C21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY EPSILON",
+          "venue": "AB02-205",
+          "building": null,
+          "room": null,
+          "availableSeats": 9,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9201",
+          "offeringId": "[\"SYN9201\",\"THEORY\",[\"F11\",\"F12\"],\"FICTIONAL FACULTY ZETA\",\"AB02-206\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "F11+F12",
+          "slots": [
+            "F11",
+            "F12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY ZETA",
+          "venue": "AB02-206",
+          "building": null,
+          "room": null,
+          "availableSeats": 20,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9202",
+      "courseName": "Visual Analytics",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9202",
+          "offeringId": "[\"SYN9202\",\"THEORY\",[\"B11\",\"B12\"],\"FICTIONAL FACULTY IOTA\",\"AB02-211\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B11+B12",
+          "slots": [
+            "B11",
+            "B12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY IOTA",
+          "venue": "AB02-211",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9202",
+          "offeringId": "[\"SYN9202\",\"THEORY\",[\"B11\",\"B12\"],\"FICTIONAL FACULTY KAPPA\",\"AB02-212\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B11+B12",
+          "slots": [
+            "B11",
+            "B12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY KAPPA",
+          "venue": "AB02-212",
+          "building": null,
+          "room": null,
+          "availableSeats": 6,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9202",
+          "offeringId": "[\"SYN9202\",\"THEORY\",[\"B11\",\"B12\"],\"FICTIONAL FACULTY LAMBDA\",\"AB02-213\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B11+B12",
+          "slots": [
+            "B11",
+            "B12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY LAMBDA",
+          "venue": "AB02-213",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9202",
+          "offeringId": "[\"SYN9202\",\"THEORY\",[\"D11\",\"D12\"],\"FICTIONAL FACULTY MU\",\"AB02-214\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D11+D12",
+          "slots": [
+            "D11",
+            "D12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY MU",
+          "venue": "AB02-214",
+          "building": null,
+          "room": null,
+          "availableSeats": 15,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9202",
+          "offeringId": "[\"SYN9202\",\"THEORY\",[\"A21\",\"A22\"],\"FICTIONAL FACULTY NU\",\"AB02-215\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A21+A22",
+          "slots": [
+            "A21",
+            "A22"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY NU",
+          "venue": "AB02-215",
+          "building": null,
+          "room": null,
+          "availableSeats": 14,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9202",
+          "offeringId": "[\"SYN9202\",\"THEORY\",[\"E21\"],\"FICTIONAL FACULTY XI\",\"AB02-216\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "E21",
+          "slots": [
+            "E21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY XI",
+          "venue": "AB02-216",
+          "building": null,
+          "room": null,
+          "availableSeats": 5,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9203",
+      "courseName": "Cloud Foundations",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9203",
+          "offeringId": "[\"SYN9203\",\"THEORY\",[\"C11\",\"C12\"],\"FICTIONAL FACULTY OMICRON\",\"AB02-221\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C11+C12",
+          "slots": [
+            "C11",
+            "C12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY OMICRON",
+          "venue": "AB02-221",
+          "building": null,
+          "room": null,
+          "availableSeats": 21,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9203",
+          "offeringId": "[\"SYN9203\",\"THEORY\",[\"C11\",\"C12\"],\"FICTIONAL FACULTY PI\",\"AB02-222\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C11+C12",
+          "slots": [
+            "C11",
+            "C12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PI",
+          "venue": "AB02-222",
+          "building": null,
+          "room": null,
+          "availableSeats": 13,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9203",
+          "offeringId": "[\"SYN9203\",\"THEORY\",[\"A11\",\"B11\"],\"FICTIONAL FACULTY RHO\",\"AB02-223\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+B11",
+          "slots": [
+            "A11",
+            "B11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY RHO",
+          "venue": "AB02-223",
+          "building": null,
+          "room": null,
+          "availableSeats": 10,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9203",
+          "offeringId": "[\"SYN9203\",\"THEORY\",[\"E11\",\"E12\"],\"FICTIONAL FACULTY SIGMA\",\"AB02-224\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "E11+E12",
+          "slots": [
+            "E11",
+            "E12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY SIGMA",
+          "venue": "AB02-224",
+          "building": null,
+          "room": null,
+          "availableSeats": 17,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9203",
+          "offeringId": "[\"SYN9203\",\"THEORY\",[\"A23\"],\"FICTIONAL FACULTY TAU\",\"AB02-225\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A23",
+          "slots": [
+            "A23"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY TAU",
+          "venue": "AB02-225",
+          "building": null,
+          "room": null,
+          "availableSeats": 8,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9204",
+      "courseName": "Secure Coding Studio",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9204",
+          "offeringId": "[\"SYN9204\",\"THEORY\",[\"D11\",\"D12\"],\"FICTIONAL FACULTY UPSILON\",\"AB02-231\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D11+D12",
+          "slots": [
+            "D11",
+            "D12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY UPSILON",
+          "venue": "AB02-231",
+          "building": null,
+          "room": null,
+          "availableSeats": 16,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9204",
+          "offeringId": "[\"SYN9204\",\"THEORY\",[\"D11\",\"D12\"],\"FICTIONAL FACULTY PHI\",\"AB02-232\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D11+D12",
+          "slots": [
+            "D11",
+            "D12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PHI",
+          "venue": "AB02-232",
+          "building": null,
+          "room": null,
+          "availableSeats": 9,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9204",
+          "offeringId": "[\"SYN9204\",\"THEORY\",[\"A11\",\"A12\"],\"FICTIONAL FACULTY CHI\",\"AB02-233\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY CHI",
+          "venue": "AB02-233",
+          "building": null,
+          "room": null,
+          "availableSeats": 11,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9204",
+          "offeringId": "[\"SYN9204\",\"THEORY\",[\"B21\",\"E14\"],\"FICTIONAL FACULTY PSI\",\"AB02-234\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B21+E14",
+          "slots": [
+            "B21",
+            "E14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PSI",
+          "venue": "AB02-234",
+          "building": null,
+          "room": null,
+          "availableSeats": 7,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9204",
+          "offeringId": "[\"SYN9204\",\"THEORY\",[\"F21\"],\"FICTIONAL FACULTY OMEGA\",\"AB02-235\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "F21",
+          "slots": [
+            "F21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY OMEGA",
+          "venue": "AB02-235",
+          "building": null,
+          "room": null,
+          "availableSeats": 4,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9205",
+      "courseName": "Computing Studio Practicum",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9205",
+          "offeringId": "[\"SYN9205\",\"THEORY\",[\"F11\",\"F12\"],\"FICTIONAL FACULTY STUDIO\",\"AB02-241\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "F11+F12",
+          "slots": [
+            "F11",
+            "F12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY STUDIO",
+          "venue": "AB02-241",
+          "building": null,
+          "room": null,
+          "availableSeats": 22,
+          "totalSeats": 30,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9206",
+      "courseName": "Advanced Network Topics",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9206",
+          "offeringId": "[\"SYN9206\",\"THEORY\",[\"A14\",\"D11\"],\"FICTIONAL FACULTY FULL A\",\"AB02-251\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A14+D11",
+          "slots": [
+            "A14",
+            "D11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY FULL A",
+          "venue": "AB02-251",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9206",
+          "offeringId": "[\"SYN9206\",\"THEORY\",[\"B21\",\"E14\"],\"FICTIONAL FACULTY FULL B\",\"AB02-252\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B21+E14",
+          "slots": [
+            "B21",
+            "E14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY FULL B",
+          "venue": "AB02-252",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9206",
+          "offeringId": "[\"SYN9206\",\"THEORY\",[\"C21\",\"F21\"],\"FICTIONAL FACULTY FULL C\",\"AB02-253\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C21+F21",
+          "slots": [
+            "C21",
+            "F21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY FULL C",
+          "venue": "AB02-253",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9206",
+          "offeringId": "[\"SYN9206\",\"THEORY\",[\"A21\",\"D21\"],\"FICTIONAL FACULTY FULL D\",\"AB02-254\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A21+D21",
+          "slots": [
+            "A21",
+            "D21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY FULL D",
+          "venue": "AB02-254",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 60,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9207",
+      "courseName": "Civic Technology Lab",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9207",
+          "offeringId": "[\"SYN9207\",\"THEORY\",[\"C21\"],\"FICTIONAL FACULTY LIMITED A\",\"AB02-261\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C21",
+          "slots": [
+            "C21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY LIMITED A",
+          "venue": "AB02-261",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 40,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9207",
+          "offeringId": "[\"SYN9207\",\"THEORY\",[\"C21\"],\"FICTIONAL FACULTY LIMITED B\",\"AB02-262\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C21",
+          "slots": [
+            "C21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY LIMITED B",
+          "venue": "AB02-262",
+          "building": null,
+          "room": null,
+          "availableSeats": 2,
+          "totalSeats": 40,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9207",
+          "offeringId": "[\"SYN9207\",\"THEORY\",[\"C21\"],\"FICTIONAL FACULTY LIMITED C\",\"AB02-263\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C21",
+          "slots": [
+            "C21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY LIMITED C",
+          "venue": "AB02-263",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 40,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9207",
+          "offeringId": "[\"SYN9207\",\"THEORY\",[\"A21\",\"A22\"],\"FICTIONAL FACULTY LIMITED D\",\"AB02-264\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A21+A22",
+          "slots": [
+            "A21",
+            "A22"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY LIMITED D",
+          "venue": "AB02-264",
+          "building": null,
+          "room": null,
+          "availableSeats": 0,
+          "totalSeats": 40,
+          "classStatus": "Full",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9208",
+      "courseName": "Software Design Project",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9208",
+          "offeringId": "[\"SYN9208\",\"THEORY\",[\"A11\",\"A12\"],\"FICTIONAL FACULTY PROJECT A\",\"AB02-271\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PROJECT A",
+          "venue": "AB02-271",
+          "building": null,
+          "room": null,
+          "availableSeats": 24,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9208",
+          "offeringId": "[\"SYN9208\",\"THEORY\",[\"D11\",\"D12\"],\"FICTIONAL FACULTY PROJECT B\",\"AB02-272\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D11+D12",
+          "slots": [
+            "D11",
+            "D12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PROJECT B",
+          "venue": "AB02-272",
+          "building": null,
+          "room": null,
+          "availableSeats": 19,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9208",
+          "offeringId": "[\"SYN9208\",\"THEORY\",[\"A21\",\"A22\"],\"FICTIONAL FACULTY PROJECT C\",\"AB02-273\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A21+A22",
+          "slots": [
+            "A21",
+            "A22"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PROJECT C",
+          "venue": "AB02-273",
+          "building": null,
+          "room": null,
+          "availableSeats": 13,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9208",
+          "offeringId": "[\"SYN9208\",\"THEORY\",[\"E11\",\"E12\"],\"FICTIONAL FACULTY PROJECT D\",\"AB02-274\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "E11+E12",
+          "slots": [
+            "E11",
+            "E12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PROJECT D",
+          "venue": "AB02-274",
+          "building": null,
+          "room": null,
+          "availableSeats": 11,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9208",
+          "offeringId": "[\"SYN9208\",\"THEORY\",[\"B21\",\"E14\"],\"FICTIONAL FACULTY PROJECT E\",\"AB02-275\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B21+E14",
+          "slots": [
+            "B21",
+            "E14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PROJECT E",
+          "venue": "AB02-275",
+          "building": null,
+          "room": null,
+          "availableSeats": 8,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9208",
+          "offeringId": "[\"SYN9208\",\"THEORY\",[\"C21\"],\"FICTIONAL FACULTY PROJECT F\",\"AB02-276\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "C21",
+          "slots": [
+            "C21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PROJECT F",
+          "venue": "AB02-276",
+          "building": null,
+          "room": null,
+          "availableSeats": 5,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9208",
+          "offeringId": "[\"SYN9208\",\"THEORY\",[\"F11\",\"F12\"],\"FICTIONAL FACULTY PROJECT G\",\"AB02-277\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "F11+F12",
+          "slots": [
+            "F11",
+            "F12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PROJECT G",
+          "venue": "AB02-277",
+          "building": null,
+          "room": null,
+          "availableSeats": null,
+          "totalSeats": null,
+          "classStatus": null,
+          "missingFields": [
+            "availableSeats",
+            "totalSeats"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9208",
+          "offeringId": "[\"SYN9208\",\"THEORY\",[\"D23\"],\"FICTIONAL FACULTY PROJECT H\",\"AB02-278\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D23",
+          "slots": [
+            "D23"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY PROJECT H",
+          "venue": "AB02-278",
+          "building": null,
+          "room": null,
+          "availableSeats": 3,
+          "totalSeats": 60,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9209",
+      "courseName": "Schedule Quality Workshop",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9209",
+          "offeringId": "[\"SYN9209\",\"THEORY\",[\"A11\",\"A14\"],\"FICTIONAL FACULTY GAP A\",\"AB02-281\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A14",
+          "slots": [
+            "A11",
+            "A14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY GAP A",
+          "venue": "AB02-281",
+          "building": null,
+          "room": null,
+          "availableSeats": 12,
+          "totalSeats": 50,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9209",
+          "offeringId": "[\"SYN9209\",\"THEORY\",[\"B11\",\"C11\"],\"FICTIONAL FACULTY GAP B\",\"AB02-282\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B11+C11",
+          "slots": [
+            "B11",
+            "C11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY GAP B",
+          "venue": "AB02-282",
+          "building": null,
+          "room": null,
+          "availableSeats": 12,
+          "totalSeats": 50,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9209",
+          "offeringId": "[\"SYN9209\",\"THEORY\",[\"A11\",\"A12\"],\"FICTIONAL FACULTY GAP C\",\"AB02-283\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11+A12",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY GAP C",
+          "venue": "AB02-283",
+          "building": null,
+          "room": null,
+          "availableSeats": 12,
+          "totalSeats": 50,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9209",
+          "offeringId": "[\"SYN9209\",\"THEORY\",[\"B21\",\"B22\"],\"FICTIONAL FACULTY GAP D\",\"AB02-284\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B21+B22",
+          "slots": [
+            "B21",
+            "B22"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY GAP D",
+          "venue": "AB02-284",
+          "building": null,
+          "room": null,
+          "availableSeats": 12,
+          "totalSeats": 50,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    },
+    {
+      "courseCode": "SYN9210",
+      "courseName": "Responsible Systems Seminar",
+      "categories": [
+        "SYNTHETIC TEST FIXTURE"
+      ],
+      "courseStructure": "3-0-0-0-3",
+      "credits": 3,
+      "enrichmentHistory": [],
+      "conflicts": [],
+      "options": [
+        {
+          "courseCode": "SYN9210",
+          "offeringId": "[\"SYN9210\",\"THEORY\",[\"A21\"],\"FICTIONAL FACULTY SEMINAR A\",\"AB02-291\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A21",
+          "slots": [
+            "A21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY SEMINAR A",
+          "venue": "AB02-291",
+          "building": null,
+          "room": null,
+          "availableSeats": 10,
+          "totalSeats": 35,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9210",
+          "offeringId": "[\"SYN9210\",\"THEORY\",[\"D21\"],\"FICTIONAL FACULTY SEMINAR B\",\"AB02-292\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "D21",
+          "slots": [
+            "D21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY SEMINAR B",
+          "venue": "AB02-292",
+          "building": null,
+          "room": null,
+          "availableSeats": 10,
+          "totalSeats": 35,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9210",
+          "offeringId": "[\"SYN9210\",\"THEORY\",[\"A14\"],null,null]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A14",
+          "slots": [
+            "A14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": null,
+          "venue": null,
+          "building": null,
+          "room": null,
+          "availableSeats": null,
+          "totalSeats": null,
+          "classStatus": null,
+          "missingFields": [
+            "facultyName",
+            "venue",
+            "availableSeats",
+            "totalSeats"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9210",
+          "offeringId": "[\"SYN9210\",\"THEORY\",[\"E11\"],\"FICTIONAL FACULTY SEMINAR D\",null]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "E11",
+          "slots": [
+            "E11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY SEMINAR D",
+          "venue": null,
+          "building": null,
+          "room": null,
+          "availableSeats": 9,
+          "totalSeats": 35,
+          "classStatus": "Open",
+          "missingFields": [
+            "venue"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9210",
+          "offeringId": "[\"SYN9210\",\"THEORY\",[\"B21\"],\"FICTIONAL FACULTY SEMINAR E\",\"AB02-295\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "B21",
+          "slots": [
+            "B21"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY SEMINAR E",
+          "venue": "AB02-295",
+          "building": null,
+          "room": null,
+          "availableSeats": 9,
+          "totalSeats": 35,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        },
+        {
+          "courseCode": "SYN9210",
+          "offeringId": "[\"SYN9210\",\"THEORY\",[\"A11\"],\"FICTIONAL FACULTY SEMINAR F\",\"AB02-296\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Theory",
+          "rawSlot": "A11",
+          "slots": [
+            "A11"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "FICTIONAL FACULTY SEMINAR F",
+          "venue": "AB02-296",
+          "building": null,
+          "room": null,
+          "availableSeats": 8,
+          "totalSeats": 35,
+          "classStatus": "Open",
+          "missingFields": [],
+          "warnings": []
+        }
+      ],
+      "missingFields": []
+    }
+  ],
+  "possibleMatches": [],
+  "extractionReport": {
+    "totalRowsScanned": 80,
+    "totalRowsRejected": 0,
+    "totalOfferingsExtracted": 80,
+    "totalUniqueOfferingsInSession": 80,
+    "missingFieldsSummary": {
+      "totalSeats": 5,
+      "classStatus": 2,
+      "availableSeats": 7,
+      "venue": 3
+    },
+    "unverifiedSlots": [],
+    "possibleMatches": [],
+    "courseMetadataConflicts": [],
+    "warnings": [
+      "Synthetic fixture only; all added courses and offerings are fictional.",
+      "Existing CSE9101 N/A seat-warning example preserved.",
+      "SYN9210 includes missing faculty metadata for a parser-supported warning example."
+    ],
+    "errors": []
+  }
+}

@@ -1,0 +1,561 @@
+{
+  "schemaVersion": "1.5.0",
+  "source": {
+    "system": "VTOP",
+    "campus": "VIT Bhopal University",
+    "verifiedOrigin": "https://vtop.vitbhopal.ac.in",
+    "extensionVersion": "1.1.0",
+    "exportedAt": "2026-11-14T18:38:27.163Z"
+  },
+  "importSession": {
+    "sessionId": "ses_7htix9nnjf",
+    "startedAt": "2026-11-14T18:36:48.187Z",
+    "completedAt": "2026-11-14T18:38:27.163Z",
+    "totalImportAttempts": 4,
+    "totalCourses": 5,
+    "totalOfferings": 11,
+    "totalPossibleMatches": 0
+  },
+  "pageHistory": [
+    {
+      "attemptIndex": 1,
+      "category": null,
+      "importedAt": "2026-11-14T18:36:58.775Z",
+      "metrics": {
+        "domRowsDetected": 5,
+        "duplicateRows": 0,
+        "incompleteRows": 5,
+        "offeringsAdded": 5,
+        "offeringsExtracted": 5,
+        "offeringsUnchanged": 0,
+        "offeringsUpdated": 0,
+        "rejectionReasons": {},
+        "rowsAccepted": 5,
+        "rowsRejected": 0,
+        "rowsScanned": 5,
+        "rowsSkipped": 1
+      },
+      "pageTitle": "VTOP FFCS Demo",
+      "sanitizedUrl": null
+    },
+    {
+      "attemptIndex": 2,
+      "category": null,
+      "importedAt": "2026-11-14T18:37:33.194Z",
+      "metrics": {
+        "domRowsDetected": 2,
+        "duplicateRows": 0,
+        "incompleteRows": 0,
+        "offeringsAdded": 2,
+        "offeringsExtracted": 2,
+        "offeringsUnchanged": 0,
+        "offeringsUpdated": 0,
+        "rejectionReasons": {},
+        "rowsAccepted": 2,
+        "rowsRejected": 0,
+        "rowsScanned": 2,
+        "rowsSkipped": 1
+      },
+      "pageTitle": "VTOP FFCS Demo",
+      "sanitizedUrl": null
+    },
+    {
+      "attemptIndex": 3,
+      "category": null,
+      "importedAt": "2026-11-14T18:37:48.317Z",
+      "metrics": {
+        "domRowsDetected": 2,
+        "duplicateRows": 0,
+        "incompleteRows": 0,
+        "offeringsAdded": 2,
+        "offeringsExtracted": 2,
+        "offeringsUnchanged": 0,
+        "offeringsUpdated": 0,
+        "rejectionReasons": {},
+        "rowsAccepted": 2,
+        "rowsRejected": 0,
+        "rowsScanned": 2,
+        "rowsSkipped": 1
+      },
+      "pageTitle": "VTOP FFCS Demo",
+      "sanitizedUrl": null
+    },
+    {
+      "attemptIndex": 4,
+      "pageTitle": "VTOP FFCS Demo",
+      "sanitizedUrl": null,
+      "category": null,
+      "importedAt": "2026-11-14T18:38:11.148Z",
+      "metrics": {
+        "domRowsDetected": 2,
+        "rowsScanned": 2,
+        "rowsAccepted": 2,
+        "rowsRejected": 0,
+        "rowsSkipped": 1,
+        "duplicateRows": 0,
+        "incompleteRows": 0,
+        "rejectionReasons": {},
+        "offeringsExtracted": 2,
+        "offeringsAdded": 2,
+        "offeringsUpdated": 0,
+        "offeringsUnchanged": 0
+      }
+    }
+  ],
+  "courses": [
+    {
+      "categories": [],
+      "conflicts": [],
+      "courseCode": "MCA1002",
+      "courseName": "Problem Solving using Data structures and Algorithms",
+      "courseStructure": null,
+      "credits": null,
+      "enrichmentHistory": [],
+      "missingFields": [
+        "credits",
+        "courseStructure"
+      ],
+      "options": [
+        {
+          "availableSeats": null,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Tutorial, practical hours only",
+          "courseCode": "MCA1002",
+          "facultyName": null,
+          "missingFields": [
+            "facultyName",
+            "venue",
+            "availableSeats",
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA1002\",\"LECTURE AND TUTORIAL, PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+          "rawSlot": "Register",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONTAINS_UNVERIFIED",
+          "slots": [
+            "REGISTER"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": null,
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "conflicts": [],
+      "courseCode": "MCA1003",
+      "courseName": "Object Oriented Programming using Java",
+      "courseStructure": null,
+      "credits": null,
+      "enrichmentHistory": [],
+      "missingFields": [
+        "credits",
+        "courseStructure"
+      ],
+      "options": [
+        {
+          "availableSeats": null,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Tutorial, practical hours only",
+          "courseCode": "MCA1003",
+          "facultyName": null,
+          "missingFields": [
+            "facultyName",
+            "venue",
+            "availableSeats",
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA1003\",\"LECTURE AND TUTORIAL, PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+          "rawSlot": "Register",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONTAINS_UNVERIFIED",
+          "slots": [
+            "REGISTER"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": null,
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "conflicts": [],
+      "courseCode": "MCA1004",
+      "courseName": "Advanced Operating System",
+      "courseStructure": "0 0 0 0 3",
+      "credits": 3,
+      "enrichmentHistory": [
+        {
+          "attemptIndex": 2,
+          "enrichedValue": 3,
+          "field": "credits",
+          "previousValue": null,
+          "sourceUrl": null
+        },
+        {
+          "attemptIndex": 2,
+          "enrichedValue": "0 0 0 0 3",
+          "field": "courseStructure",
+          "previousValue": null,
+          "sourceUrl": null
+        }
+      ],
+      "missingFields": [],
+      "options": [
+        {
+          "availableSeats": null,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "courseCode": "MCA1004",
+          "facultyName": null,
+          "missingFields": [
+            "facultyName",
+            "venue",
+            "availableSeats",
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA1004\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+          "rawSlot": "Register",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONTAINS_UNVERIFIED",
+          "slots": [
+            "REGISTER"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": null,
+          "warnings": []
+        },
+        {
+          "availableSeats": 75,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "courseCode": "MCA1004",
+          "facultyName": "NF-1(SCSE) - SCSE",
+          "missingFields": [
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA1004\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"A11\",\"A12\"],\"NF-1(SCSE) - SCSE\",\"AB305\"]",
+          "rawSlot": "A11+A12",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "slots": [
+            "A11",
+            "A12"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": "AB305",
+          "warnings": []
+        },
+        {
+          "availableSeats": 75,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "courseCode": "MCA1004",
+          "facultyName": "NF-1(SCSE) - SCSE",
+          "missingFields": [
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA1004\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"D21\",\"D22\"],\"NF-1(SCSE) - SCSE\",\"CR-013\"]",
+          "rawSlot": "D21+D22",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "slots": [
+            "D21",
+            "D22"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": "CR-013",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "conflicts": [],
+      "courseCode": "MCA1005",
+      "courseName": "Database Technologies",
+      "courseStructure": "3 0 1 0 4",
+      "credits": 4,
+      "enrichmentHistory": [
+        {
+          "field": "credits",
+          "previousValue": null,
+          "enrichedValue": 4,
+          "attemptIndex": 4,
+          "sourceUrl": null
+        },
+        {
+          "field": "courseStructure",
+          "previousValue": null,
+          "enrichedValue": "3 0 1 0 4",
+          "attemptIndex": 4,
+          "sourceUrl": null
+        }
+      ],
+      "missingFields": [],
+      "options": [
+        {
+          "availableSeats": null,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "courseCode": "MCA1005",
+          "facultyName": null,
+          "missingFields": [
+            "facultyName",
+            "venue",
+            "availableSeats",
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA1005\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+          "rawSlot": "Register",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONTAINS_UNVERIFIED",
+          "slots": [
+            "REGISTER"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": null,
+          "warnings": []
+        },
+        {
+          "courseCode": "MCA1005",
+          "offeringId": "[\"MCA1005\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"A11\",\"A12\",\"A13\"],\"VIVEK - SCSE\",\"CR-022\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "rawSlot": "A11+A12+A13",
+          "slots": [
+            "A11",
+            "A12",
+            "A13"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "VIVEK - SCSE",
+          "venue": "CR-022",
+          "building": null,
+          "room": null,
+          "availableSeats": 75,
+          "totalSeats": null,
+          "classStatus": null,
+          "missingFields": [
+            "totalSeats",
+            "classStatus"
+          ],
+          "warnings": []
+        },
+        {
+          "courseCode": "MCA1005",
+          "offeringId": "[\"MCA1005\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"B14\",\"D11\",\"D12\"],\"VIVEK - SCSE\",\"CR-027\"]",
+          "sourceOfferingId": null,
+          "scopedSourceId": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "rawSlot": "D11+D12+B14",
+          "slots": [
+            "D11",
+            "D12",
+            "B14"
+          ],
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "facultyName": "VIVEK - SCSE",
+          "venue": "CR-027",
+          "building": null,
+          "room": null,
+          "availableSeats": 75,
+          "totalSeats": null,
+          "classStatus": null,
+          "missingFields": [
+            "totalSeats",
+            "classStatus"
+          ],
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "categories": [],
+      "conflicts": [],
+      "courseCode": "MCA2006",
+      "courseName": "Data Communications And Networks",
+      "courseStructure": "2 0 1 0 3",
+      "credits": 3,
+      "enrichmentHistory": [
+        {
+          "attemptIndex": 3,
+          "enrichedValue": 3,
+          "field": "credits",
+          "previousValue": null,
+          "sourceUrl": null
+        },
+        {
+          "attemptIndex": 3,
+          "enrichedValue": "2 0 1 0 3",
+          "field": "courseStructure",
+          "previousValue": null,
+          "sourceUrl": null
+        }
+      ],
+      "missingFields": [],
+      "options": [
+        {
+          "availableSeats": null,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "courseCode": "MCA2006",
+          "facultyName": null,
+          "missingFields": [
+            "facultyName",
+            "venue",
+            "availableSeats",
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA2006\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+          "rawSlot": "Register",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONTAINS_UNVERIFIED",
+          "slots": [
+            "REGISTER"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": null,
+          "warnings": []
+        },
+        {
+          "availableSeats": 50,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "courseCode": "MCA2006",
+          "facultyName": "SANJAY MISHRA - SCSE",
+          "missingFields": [
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA2006\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"E11\",\"E12\"],\"SANJAY MISHRA - SCSE\",\"CR-009\"]",
+          "rawSlot": "E11+E12",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "slots": [
+            "E11",
+            "E12"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": "CR-009",
+          "warnings": []
+        },
+        {
+          "availableSeats": 50,
+          "building": null,
+          "classStatus": null,
+          "componentType": "Lecture and Practical Hours Only",
+          "courseCode": "MCA2006",
+          "facultyName": "VIVEK - SCSE",
+          "missingFields": [
+            "totalSeats",
+            "classStatus"
+          ],
+          "offeringId": "[\"MCA2006\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"F11\",\"F12\"],\"VIVEK - SCSE\",\"CR-008\"]",
+          "rawSlot": "F11+F12",
+          "room": null,
+          "scopedSourceId": null,
+          "slotVerificationStatus": "CONFIRMED_THEORY",
+          "slots": [
+            "F11",
+            "F12"
+          ],
+          "sourceOfferingId": null,
+          "totalSeats": null,
+          "venue": "CR-008",
+          "warnings": []
+        }
+      ]
+    }
+  ],
+  "possibleMatches": [],
+  "extractionReport": {
+    "totalRowsScanned": 11,
+    "totalRowsRejected": 0,
+    "totalOfferingsExtracted": 11,
+    "totalUniqueOfferingsInSession": 11,
+    "missingFieldsSummary": {
+      "missingCourseStructures": 2,
+      "missingFaculty": 5,
+      "missingVenue": 5,
+      "missingAvailableSeats": 5,
+      "missingTotalSeats": 11,
+      "missingClassStatus": 11,
+      "zeroAvailableSeats": 0
+    },
+    "unverifiedSlots": [
+      {
+        "slotCode": "REGISTER",
+        "rawSlot": "Register",
+        "offeringId": "[\"MCA1002\",\"LECTURE AND TUTORIAL, PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+        "reason": "Not in confirmed 42 theory slots; excluded from automated timetable clash validation"
+      },
+      {
+        "slotCode": "REGISTER",
+        "rawSlot": "Register",
+        "offeringId": "[\"MCA1003\",\"LECTURE AND TUTORIAL, PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+        "reason": "Not in confirmed 42 theory slots; excluded from automated timetable clash validation"
+      },
+      {
+        "slotCode": "REGISTER",
+        "rawSlot": "Register",
+        "offeringId": "[\"MCA1004\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+        "reason": "Not in confirmed 42 theory slots; excluded from automated timetable clash validation"
+      },
+      {
+        "slotCode": "REGISTER",
+        "rawSlot": "Register",
+        "offeringId": "[\"MCA1005\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+        "reason": "Not in confirmed 42 theory slots; excluded from automated timetable clash validation"
+      },
+      {
+        "slotCode": "REGISTER",
+        "rawSlot": "Register",
+        "offeringId": "[\"MCA2006\",\"LECTURE AND PRACTICAL HOURS ONLY\",[\"REGISTER\"],null,null]",
+        "reason": "Not in confirmed 42 theory slots; excluded from automated timetable clash validation"
+      }
+    ],
+    "possibleMatches": [],
+    "courseMetadataConflicts": [],
+    "warnings": [
+      "5 offering(s) contain null facultyName.",
+      "5 offering(s) contain null venue.",
+      "5 unverified slot code(s) detected and excluded from automated clash validation."
+    ],
+    "errors": []
+  }
+}

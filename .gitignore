@@ -1,0 +1,21 @@
+# Dependencies and generated builds
+**/node_modules/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+frontend/dist/
+api-server/dist/
+frontend/*.tsbuildinfo
+dist/
+coverage/
+playwright-report/
+test-results/
+.vercel/
+
+# Local configuration and runtime state
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+ffcs_store.json

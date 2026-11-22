@@ -1,0 +1,81 @@
+FacultyName,Department,OverallRating,ReviewCount,Difficulty,AttendanceLeniency,InternalMarks,WouldTakeAgain,RecommendedPercentage,AcademicBlock,Floor,LastUpdated
+Dr. Pushpinder Singh Patheja,CSE,4.8,320,2.8,4.5,88,true,94,AB,3,2025-01-15
+Dr. Pon Harshavardhanan,CSE,4.7,280,3.0,4.2,85,true,92,AB,3,2025-01-10
+Dr. Komarasamy G,CSE,4.6,245,3.1,4.1,84,true,89,AB,2,2024-12-20
+Dr. Dheresh Soni,CSE,4.5,195,3.3,4.0,82,true,87,AB,4,2025-01-05
+Dr. AVR Mayuri,CSE,4.7,210,2.6,4.4,87,true,93,AB,2,2024-11-28
+Dr. D. Saravanan,CSE,4.4,160,3.4,3.9,80,true,85,AB,4,2024-12-12
+Dr. Sheetal Sharma,CSE,4.6,310,2.9,4.3,86,true,91,AB,3,2025-01-18
+Dr. S. Poonkuntran,CSE,4.8,410,2.7,4.6,89,true,95,AB,3,2025-01-20
+Dr. R. Shriram,CSE,4.5,230,3.2,4.0,83,true,88,AB,2,2024-12-15
+Dr. M. K. Jayanthi,CSE,4.3,175,3.5,3.8,79,true,82,AB,5,2024-11-20
+Dr. Lakshmi D,CSE,4.6,265,3.0,4.2,85,true,90,AB,4,2024-12-30
+Dr. I. Jasmine Selvakumari Jeya,CSE,4.5,220,3.1,4.1,83,true,88,AB,3,2025-01-08
+Dr. R. Senthilkumar,CSE,4.4,185,3.3,3.9,81,true,84,AB,2,2024-12-05
+Dr. Sasmita Padhy,CSE,4.7,290,2.8,4.5,88,true,93,AB,5,2025-01-12
+Dr. Santosh Kumar Sahoo,CSE,4.2,140,3.7,3.6,77,true,79,AB,4,2024-11-15
+Dr. N. Kannaiya Raja,CSE,4.5,205,3.1,4.0,82,true,87,AB,3,2024-12-18
+Dr. Vinod Bhatt,CSE,4.3,155,3.6,3.7,78,true,81,AB,4,2024-12-02
+Dr. Prakash NB,CSE,4.4,170,3.4,3.9,80,true,83,AB,2,2024-11-25
+Dr. Paras Jain,CSE,4.6,250,2.9,4.3,86,true,91,AB,3,2025-01-14
+Dr. Abdul Rehman,CSE,4.1,125,3.8,3.5,75,false,74,AB,5,2024-10-30
+Dr. Navneet Kumar Verma,CSE,4.3,160,3.5,3.8,79,true,82,AB,4,2024-11-18
+Dr. A. Sirajudeen,CSE,4.5,215,3.0,4.1,83,true,88,AB,2,2024-12-22
+Dr. Gunjan Ansari,CSE,4.4,180,3.2,4.0,81,true,85,AB,3,2024-12-10
+Dr. Preetam Suman,CSE,4.6,235,3.0,4.2,85,true,90,AB,4,2025-01-02
+Dr. Abhinav Kumar,CSE,4.3,145,3.5,3.7,78,true,80,AB,3,2024-11-22
+Dr. M. Suresh,ECE,4.7,300,2.9,4.4,87,true,93,AB,2,2025-01-16
+Dr. Anirban Bhowmick,ECE,4.5,210,3.1,4.1,83,true,88,AB,3,2024-12-28
+Dr. Arindam Dutta,ECE,4.3,150,3.6,3.7,77,true,80,AB,4,2024-11-12
+Dr. Indhumathi S.,ECE,4.6,240,2.8,4.3,86,true,91,AB,2,2025-01-04
+Dr. Thiyagu Priyadharsan,ECE,4.4,175,3.3,3.9,81,true,84,AB,5,2024-12-08
+Dr. Deep Chandra Upadhyay,ECE,4.2,130,3.8,3.5,75,false,76,AB,4,2024-10-25
+Dr. S. Periyanayagi,ECE,4.6,260,2.9,4.3,85,true,90,AB,3,2025-01-11
+Dr. G. Vishnuvarthanan,ECE,4.5,195,3.2,4.0,82,true,86,AB,2,2024-12-14
+Dr. Pramod Kumar Bhatt,ECE,4.3,165,3.5,3.8,78,true,81,AB,4,2024-11-29
+Dr. Nilamadhab Mishra,ECE,4.4,180,3.3,3.9,80,true,83,AB,5,2024-12-06
+Dr. S. Balaguru,MECH,4.6,270,3.0,4.2,85,true,90,AB,2,2025-01-09
+Dr. Benedict Thomas,MECH,4.7,285,2.8,4.4,88,true,93,AB,3,2025-01-17
+Dr. Pushpdant Jain,MECH,4.4,190,3.2,4.0,81,true,85,AB,4,2024-12-19
+Dr. Akash Mohanty,MECH,4.5,215,3.1,4.1,83,true,87,AB,3,2024-12-25
+Dr. Arivarasu M.,MECH,4.3,160,3.5,3.8,78,true,81,AB,5,2024-11-14
+Dr. S. Ananthakumaran,MECH,4.2,135,3.7,3.6,76,false,77,AB,4,2024-10-28
+Dr. Venkat Padhy,MECH,4.1,120,3.9,3.4,74,false,73,AB,6,2024-10-15
+Dr. Zaheer Kareem Ansari,PHYS,4.8,350,2.6,4.6,90,true,95,AB,2,2025-01-19
+Dr. Hemant Kumar Nashine,MATH,4.9,450,2.3,4.7,92,true,97,AB,3,2025-01-21
+Dr. Neha Choubey,MATH,4.7,310,2.7,4.4,88,true,93,AB,4,2025-01-13
+Dr. Manoj Acharya,CHEM,4.6,260,2.9,4.3,85,true,91,AB,2,2025-01-07
+Dr. Yogesh Shukla,MATH,4.5,225,3.1,4.1,83,true,88,AB,5,2024-12-21
+Dr. Manisha Jain,MATH,4.6,275,2.8,4.3,86,true,92,AB,3,2025-01-06
+Dr. Mamta Agrawal,PHYS,4.4,190,3.3,3.9,80,true,84,AB,4,2024-12-11
+Dr. Anjali Mathur,CHEM,4.5,210,3.0,4.1,84,true,87,AB,2,2024-12-27
+Dr. Sandip Mal,PHYS,4.3,155,3.6,3.7,77,true,79,AB,5,2024-11-21
+Dr. Pavan Kumar,MATH,4.2,140,3.7,3.6,75,false,76,AB,4,2024-11-08
+Dr. Siddhartha Maiti,BIO,4.6,230,2.9,4.3,86,true,91,LAB,2,2025-01-03
+Dr. Bhakti Parashar,VITBS,4.7,295,2.7,4.5,88,true,94,AB,1,2025-01-15
+Dr. Prasad Begde,VITBS,4.5,210,3.0,4.1,83,true,88,AB,1,2024-12-16
+Dr. Moses Dian S,BIO,4.4,175,3.3,3.9,80,true,83,LAB,3,2024-12-07
+Dr. J. Manikandan,ECE,4.5,200,3.1,4.1,82,true,87,AB,3,2024-12-24
+Dr. Pradeep Kumar Mishra,CSE,4.4,165,3.4,3.9,79,true,82,AB,4,2024-12-03
+Dr. Shweta Mukherjee,CSE,4.6,250,2.9,4.3,86,true,91,AB,2,2025-01-08
+Dr. Anita Yadav,CSE,4.3,150,3.5,3.8,78,true,81,AB,3,2024-11-26
+Dr. Soumitra Keshari Nayak,ECE,4.6,220,3.0,4.2,85,true,90,AB,3,2025-01-10
+Dr. Ankur Beohar,ECE,4.5,205,3.2,4.1,83,true,88,AB,4,2024-12-28
+Dr. Rohit Sharma,MECH,4.4,185,3.3,4.0,81,true,85,AB,2,2024-12-15
+Dr. T. B. Sridharan,BIO,4.7,260,2.8,4.4,87,true,92,LAB,2,2025-01-14
+Dr. Santosh Kumar Vishwakarma,CSE,4.6,240,3.1,4.2,84,true,89,AB,3,2025-01-08
+Dr. Subodh Srivastava,CSE,4.5,215,3.0,4.1,83,true,87,AB,4,2024-12-20
+Dr. Rajiv Dey,ECE,4.4,170,3.4,3.9,80,true,83,AB,5,2024-12-04
+Dr. Vikas Kumar,CSE,4.5,195,3.2,4.0,82,true,86,AB,3,2024-12-18
+Dr. Archana Chaudhari,CSE,4.6,230,2.9,4.3,85,true,90,AB,2,2025-01-05
+Dr. Priyanka Roy,MATH,4.8,320,2.5,4.5,89,true,94,AB,4,2025-01-16
+Dr. Swati Sharma,SSL,4.7,290,2.4,4.6,88,true,93,AB,1,2025-01-12
+Dr. Rakesh Kumar,MECH,4.3,165,3.5,3.8,78,true,80,AB,4,2024-11-30
+Dr. Deepa Sharma,CHEM,4.6,225,2.9,4.2,84,true,89,AB,2,2025-01-02
+Dr. Ashish Kumar,PHYS,4.5,200,3.1,4.1,82,true,86,AB,3,2024-12-22
+Dr. Vivek Singh,CSE,4.7,275,2.7,4.4,87,true,92,CAL,2,2025-01-11
+Dr. Nidhi Jain,VITBS,4.6,240,2.9,4.3,85,true,90,AB,1,2025-01-07
+Dr. Amit Kumar Gupta,ECE,4.4,180,3.3,3.9,80,true,84,AB,3,2024-12-14
+Dr. S. K. Mahapatra,CSE,4.5,210,3.1,4.1,83,true,88,AB,4,2024-12-26
+Dr. Meenakshi Tripathi,CSE,4.6,255,2.8,4.3,86,true,91,AB,2,2025-01-09
+Dr. Alok Verma,MECH,4.3,150,3.6,3.7,77,true,79,AB,5,2024-11-19

@@ -1,0 +1,296 @@
+﻿[
+    {
+        "slotCode":  "A11",
+        "day":  "MON",
+        "timeStart":  "08:30",
+        "timeEnd":  "10:00",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "B11",
+        "day":  "MON",
+        "timeStart":  "10:05",
+        "timeEnd":  "11:35",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "C11",
+        "day":  "MON",
+        "timeStart":  "11:40",
+        "timeEnd":  "13:10",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "A21",
+        "day":  "MON",
+        "timeStart":  "13:15",
+        "timeEnd":  "14:45",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "A14",
+        "day":  "MON",
+        "timeStart":  "14:50",
+        "timeEnd":  "16:20",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "B21",
+        "day":  "MON",
+        "timeStart":  "16:25",
+        "timeEnd":  "17:55",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "C21",
+        "day":  "MON",
+        "timeStart":  "18:00",
+        "timeEnd":  "19:30",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "D11",
+        "day":  "TUE",
+        "timeStart":  "08:30",
+        "timeEnd":  "10:00",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "E11",
+        "day":  "TUE",
+        "timeStart":  "10:05",
+        "timeEnd":  "11:35",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "F11",
+        "day":  "TUE",
+        "timeStart":  "11:40",
+        "timeEnd":  "13:10",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "D21",
+        "day":  "TUE",
+        "timeStart":  "13:15",
+        "timeEnd":  "14:45",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "E14",
+        "day":  "TUE",
+        "timeStart":  "14:50",
+        "timeEnd":  "16:20",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "E21",
+        "day":  "TUE",
+        "timeStart":  "16:25",
+        "timeEnd":  "17:55",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "F21",
+        "day":  "TUE",
+        "timeStart":  "18:00",
+        "timeEnd":  "19:30",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "A12",
+        "day":  "WED",
+        "timeStart":  "08:30",
+        "timeEnd":  "10:00",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "B12",
+        "day":  "WED",
+        "timeStart":  "10:05",
+        "timeEnd":  "11:35",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "C12",
+        "day":  "WED",
+        "timeStart":  "11:40",
+        "timeEnd":  "13:10",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "A22",
+        "day":  "WED",
+        "timeStart":  "13:15",
+        "timeEnd":  "14:45",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "B14",
+        "day":  "WED",
+        "timeStart":  "14:50",
+        "timeEnd":  "16:20",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "B22",
+        "day":  "WED",
+        "timeStart":  "16:25",
+        "timeEnd":  "17:55",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "A24",
+        "day":  "WED",
+        "timeStart":  "18:00",
+        "timeEnd":  "19:30",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "D12",
+        "day":  "THU",
+        "timeStart":  "08:30",
+        "timeEnd":  "10:00",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "E12",
+        "day":  "THU",
+        "timeStart":  "10:05",
+        "timeEnd":  "11:35",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "F12",
+        "day":  "THU",
+        "timeStart":  "11:40",
+        "timeEnd":  "13:10",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "D22",
+        "day":  "THU",
+        "timeStart":  "13:15",
+        "timeEnd":  "14:45",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "F14",
+        "day":  "THU",
+        "timeStart":  "14:50",
+        "timeEnd":  "16:20",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "E22",
+        "day":  "THU",
+        "timeStart":  "16:25",
+        "timeEnd":  "17:55",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "F22",
+        "day":  "THU",
+        "timeStart":  "18:00",
+        "timeEnd":  "19:30",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "A13",
+        "day":  "FRI",
+        "timeStart":  "08:30",
+        "timeEnd":  "10:00",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "B13",
+        "day":  "FRI",
+        "timeStart":  "10:05",
+        "timeEnd":  "11:35",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "C13",
+        "day":  "FRI",
+        "timeStart":  "11:40",
+        "timeEnd":  "13:10",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "A23",
+        "day":  "FRI",
+        "timeStart":  "13:15",
+        "timeEnd":  "14:45",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "C14",
+        "day":  "FRI",
+        "timeStart":  "14:50",
+        "timeEnd":  "16:20",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "B23",
+        "day":  "FRI",
+        "timeStart":  "16:25",
+        "timeEnd":  "17:55",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "B24",
+        "day":  "FRI",
+        "timeStart":  "18:00",
+        "timeEnd":  "19:30",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "D13",
+        "day":  "SAT",
+        "timeStart":  "08:30",
+        "timeEnd":  "10:00",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "E13",
+        "day":  "SAT",
+        "timeStart":  "10:05",
+        "timeEnd":  "11:35",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "F13",
+        "day":  "SAT",
+        "timeStart":  "11:40",
+        "timeEnd":  "13:10",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "D23",
+        "day":  "SAT",
+        "timeStart":  "13:15",
+        "timeEnd":  "14:45",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "D14",
+        "day":  "SAT",
+        "timeStart":  "14:50",
+        "timeEnd":  "16:20",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "D24",
+        "day":  "SAT",
+        "timeStart":  "16:25",
+        "timeEnd":  "17:55",
+        "slotType":  "THEORY"
+    },
+    {
+        "slotCode":  "E23",
+        "day":  "SAT",
+        "timeStart":  "18:00",
+        "timeEnd":  "19:30",
+        "slotType":  "THEORY"
+    }
+]

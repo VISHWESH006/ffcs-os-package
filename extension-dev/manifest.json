@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "FFCS OS — Development Test Copy",
+  "version": "1.1.0",
+  "description": "Development copy for testing FFCS OS extraction on VTOP and explicitly allowlisted test sites.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://vtop.vitbhopal.ac.in/*",
+    "https://ffcs-demo.vercel.app/*",
+    "https://dev.vitbhopal.ac.in/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "FFCS OS Demo Test Copy",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vtop.vitbhopal.ac.in/*",
+        "https://ffcs-demo.vercel.app/*",
+        "https://dev.vitbhopal.ac.in/*"
+      ],
+      "js": ["extractor-core.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
+

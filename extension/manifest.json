@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "FFCS OS Bulk Import",
+  "version": "1.1.0",
+  "description": "Extract VIT Bhopal course registration offerings for import into FFCS OS.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://vtop.vitbhopal.ac.in/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "FFCS OS Bulk Import",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vtop.vitbhopal.ac.in/*"
+      ],
+      "js": ["extractor-core.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

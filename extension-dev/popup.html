@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FFCS OS — Bulk Extractor</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 380px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #09090b;
+      color: #f4f4f5;
+      font-size: 13px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #0d9488 0%, #2563eb 100%);
+      color: #fff;
+    }
+    .header-left { display: flex; align-items: center; gap: 10px; }
+    .header-logo { font-size: 22px; }
+    .header-title { font-weight: 700; font-size: 15px; letter-spacing: -0.3px; }
+    .header-sub { font-size: 11px; opacity: 0.9; }
+    .header-badge {
+      font-size: 10px; background: rgba(0,0,0,0.25);
+      padding: 2px 8px; border-radius: 12px; font-weight: 600;
+    }
+
+    .container { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+
+    /* Telemetry Stats */
+    .stats-card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .stat-box { display: flex; flex-direction: column; gap: 2px; }
+    .stat-val { font-size: 20px; font-weight: 700; color: #14b8a6; }
+    .stat-lbl { font-size: 10px; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Action Buttons */
+    .btn-group { display: flex; flex-direction: column; gap: 8px; }
+    .btn {
+      width: 100%; padding: 10px 14px; border-radius: 6px; border: none;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all 0.15s ease;
+    }
+    .btn-primary { background: #0d9488; color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: #0f766e; }
+    .btn-success { background: #16a34a; color: #fff; }
+    .btn-success:hover:not(:disabled) { background: #15803d; }
+    .btn-outline {
+      background: transparent; border: 1px solid #3f3f46; color: #d4d4d8;
+    }
+    .btn-outline:hover:not(:disabled) { background: #27272a; border-color: #52525b; }
+    .btn-danger { background: transparent; border: 1px solid #7f1d1d; color: #f87171; font-size: 11px; padding: 6px 10px; }
+    .btn-danger:hover:not(:disabled) { background: #450a0a; }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    /* Status & Alerts */
+    .alert {
+      padding: 10px 12px; border-radius: 6px; font-size: 12px; line-height: 1.4;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .alert-info { background: #1e293b; border: 1px solid #334155; color: #94a3b8; }
+    .alert-success { background: #064e3b; border: 1px solid #047857; color: #a7f3d0; }
+    .alert-warning { background: #451a03; border: 1px solid #78350f; color: #fde68a; }
+    .alert-error { background: #450a0a; border: 1px solid #991b1b; color: #fca5a5; }
+
+    /* Collapsible Sections */
+    .section-title {
+      font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase;
+      letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; padding: 4px 0; user-select: none;
+    }
+    .section-title:hover { color: #d4d4d8; }
+    .section-content {
+      max-height: 140px; overflow-y: auto; background: #18181b;
+      border: 1px solid #27272a; border-radius: 6px; padding: 6px 8px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .history-item {
+      font-size: 11px; padding: 5px 6px; border-radius: 4px;
+      background: #27272a; display: flex; justify-content: space-between; align-items: center;
+    }
+    .history-title { font-weight: 600; color: #e4e4e7; }
+    .history-metrics { color: #a1a1aa; font-family: monospace; font-size: 10px; }
+
+    .course-item {
+      font-size: 11px; padding: 4px 6px; border-radius: 4px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #27272a;
+    }
+    .course-item:last-child { border-bottom: none; }
+    .course-code { font-family: monospace; font-weight: 700; color: #2dd4bf; }
+    .course-name { color: #a1a1aa; flex: 1; margin: 0 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .course-opts { background: #3f3f46; color: #f4f4f5; padding: 1px 6px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+
+    .hidden { display: none !important; }
+
+    .footer {
+      padding: 10px 16px; border-top: 1px solid #27272a;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; color: #71717a;
+    }
+
+    /* Modal / Confirm Overlay */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      display: flex; align-items: center; justify-content: center; z-index: 1000;
+      padding: 20px;
+    }
+    .modal {
+      background: #18181b; border: 1px solid #3f3f46; border-radius: 8px;
+      padding: 16px; width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 12px;
+    }
+    .modal-title { font-size: 14px; font-weight: 700; color: #fff; }
+    .modal-text { font-size: 12px; color: #a1a1aa; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-left">
+      <span class="header-logo">⚡</span>
+      <div>
+        <div class="header-title">FFCS OS Development Test Copy</div>
+        <div class="header-sub">Testing on VTOP, demo, and dev.vitbhopal.ac.in</div>
+      </div>
+    </div>
+    <span class="header-badge" id="vtop-status-badge">Checking...</span>
+  </div>
+
+  <div class="container">
+    <!-- Telemetry -->
+    <div class="stats-card">
+      <div class="stat-box">
+        <span class="stat-val" id="stat-courses">0</span>
+        <span class="stat-lbl">Courses</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="stat-offerings">0</span>
+        <span class="stat-lbl">Offerings</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="stat-attempts">0</span>
+        <span class="stat-lbl">Imports</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="stat-matches" style="color: #f59e0b;">0</span>
+        <span class="stat-lbl">Conflicts</span>
+      </div>
+    </div>
+
+    <!-- Alert Message Banner -->
+    <div id="alert-box" class="alert alert-info">
+      <span id="alert-text">Demo test copy. Open the demo or VTOP course registration page.</span>
+    </div>
+    <button class="btn btn-outline hidden" id="btn-retry-storage" type="button">Retry storage access</button>
+
+    <!-- Primary Workflow Actions -->
+    <div class="btn-group">
+      <button class="btn btn-outline" id="btn-check-page" type="button">Check page again</button>
+      <button class="btn btn-primary" id="btn-import">
+        <span>📥</span> Import This Page
+      </button>
+
+      <div class="btn-row">
+        <button class="btn btn-success" id="btn-export" disabled>
+          <span>💾</span> Finish &amp; Export
+        </button>
+        <button class="btn btn-outline" id="btn-copy-json" disabled>
+          <span>📋</span> Copy JSON
+        </button>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" id="btn-new-session">
+          <span>🔄</span> New Session
+        </button>
+        <button class="btn btn-danger" id="btn-clear-session">
+          <span>🗑️</span> Reset All
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Page History -->
+    <div>
+      <div class="section-title" id="toggle-history">
+        <span>Page History (<span id="history-count">0</span>)</span>
+        <span id="history-arrow">▾</span>
+      </div>
+      <div class="section-content" id="history-list">
+        <div style="color:#71717a; text-align:center; padding: 12px 0;">No pages imported yet.</div>
+      </div>
+    </div>
+
+    <!-- Collapsible Captured Courses Preview -->
+    <div>
+      <div class="section-title" id="toggle-courses">
+        <span>Captured Courses (<span id="courses-count">0</span>)</span>
+        <span id="courses-arrow">▾</span>
+      </div>
+      <div class="section-content" id="courses-list">
+        <div style="color:#71717a; text-align:center; padding: 12px 0;">No courses captured yet.</div>
+      </div>
+    </div>
+
+    <!-- Collapsible Divergent Matches / Conflicts -->
+    <div>
+      <div class="section-title" id="toggle-matches">
+        <span>Divergent Matches (<span id="matches-count">0</span>)</span>
+        <span id="matches-arrow">▾</span>
+      </div>
+      <div class="section-content hidden" id="matches-list">
+        <div style="color:#71717a; text-align:center; padding: 12px 0;">No divergent matches detected.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>FFCS OS v1.1.0</span>
+    <span>Schema v1.5.0</span>
+  </div>
+
+  <!-- Confirmation Modal Overlay -->
+  <div id="confirm-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-title" id="modal-title">Confirm Action</div>
+      <div class="modal-text" id="modal-text">Are you sure?</div>
+      <div class="btn-row">
+        <button class="btn btn-outline" id="modal-cancel">Cancel</button>
+        <button class="btn btn-primary" id="modal-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="extractor-core.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
+
