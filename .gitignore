@@ -16,6 +16,7 @@ test-results/
 .env
 .env.*
 !.env.example
+/ffcs-os-firebase-adminsdk-fbsvc-362a7d15e0.json
 *.log
 *.tmp
 ffcs_store.json

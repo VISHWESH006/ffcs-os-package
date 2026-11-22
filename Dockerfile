@@ -1,4 +1,4 @@
-FROM node:20-bookworm-slim
+FROM node:24-bookworm-slim
 
 ENV NODE_ENV=production \
     PORT=10000 \
@@ -15,7 +15,7 @@ RUN apt-get update \
     && python3 -m venv /opt/venv
 
 COPY api-server/package.json api-server/package-lock.json ./api-server/
-RUN npm ci --prefix ./api-server
+RUN npm ci --include=dev --prefix ./api-server
 COPY api-server/build.mjs ./api-server/
 COPY api-server/src ./api-server/src
 RUN npm run build --prefix ./api-server \
