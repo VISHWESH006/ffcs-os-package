@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type React from 'react';
 import {
-  ArrowRight, BookOpen, CalendarDays, Check, CheckCircle2, ChevronDown,
+  ArrowLeftRight, ArrowRight, BookOpen, CalendarDays, Check, CheckCircle2, ChevronDown,
   ChevronRight, CircleHelp, Clock3, FileJson2, Filter, GraduationCap, LayoutDashboard,
   LoaderCircle, LogOut, MapPin, Menu, MoreHorizontal, Printer, Search, Settings2, Sparkles, Trash2,
   Upload, Users, X,
@@ -501,7 +501,7 @@ function BuilderPage({ state, validationAttempt, selectedCourses, alternatives, 
           {!selectedCourses.length && <p className="preference-help">First choose your required courses in Course workspace.</p>}
         </div>
 
-        {validationAttempt && (!validationAttempt.selectionValid || validationAttempt.selectionErrors.length > 0 || validationAttempt.selectionConflicts.length > 0) && <div className="panel conflict-panel"><div className="panel-head"><div><p className="eyebrow">CHECK YOUR CHOICE</p><h2>This combination needs changes</h2></div><X size={18} /></div>{validationAttempt.selectionConflicts.map((conflict, index) => <p key={`c-${index}`}><b>{conflict.courseCodes.join(' ↔ ')}</b> · {conflict.slots.join(', ')} · {conflict.reason}</p>)}{validationAttempt.selectionErrors.map((error, index) => <p key={`e-${index}`}><b>{error.courseCode ?? 'Offering'}</b> · {error.reason}</p>)}{validationAttempt.excludedOfferings.map((error, index) => <p key={`x-${index}`}><b>{error.courseCode ?? 'Offering'}</b> · {error.reason}</p>)}</div>}
+          {validationAttempt && (!validationAttempt.selectionValid || validationAttempt.selectionErrors.length > 0 || validationAttempt.selectionConflicts.length > 0) && <div className="panel conflict-panel"><div className="panel-head"><div><p className="eyebrow">CHECK YOUR CHOICE</p><h2>This combination needs changes</h2></div><X size={18} /></div>{validationAttempt.selectionConflicts.map((conflict, index) => <p key={`c-${index}`}><b className="conflict-courses">{conflict.courseCodes.map((code, codeIndex) => <span key={code}>{codeIndex > 0 && <ArrowLeftRight size={13} aria-hidden="true" />}{code}</span>)}</b><span> · {conflict.slots.join(', ')} · {conflict.reason}</span></p>)}{validationAttempt.selectionErrors.map((error, index) => <p key={`e-${index}`}><b>{error.courseCode ?? 'Offering'}</b> · {error.reason}</p>)}{validationAttempt.excludedOfferings.map((error, index) => <p key={`x-${index}`}><b>{error.courseCode ?? 'Offering'}</b> · {error.reason}</p>)}</div>}
 
         {alternatives.length > 0 && <section className="alternatives-section">
           <div className="section-title"><div><p className="eyebrow">STEP 2 · COMPARE</p><h2>{alternatives.length} schedule option{alternatives.length === 1 ? '' : 's'}</h2></div><span className="muted-small">Preview an option, or select two to compare.</span></div>

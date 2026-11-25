@@ -98,7 +98,10 @@ describe('student timetable workflow', () => {
     expect(screen.queryByRole('button', { name: /export json/i })).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /timetable builder/i }));
     expect(screen.getByRole('heading', { name: 'This combination needs changes' })).toBeInTheDocument();
-    expect(document.querySelector('.conflict-panel')?.textContent).toContain('CSE1001 ↔ MAT1001 · A11 · SLOT_CLASH');
+    const conflict = document.querySelector('.conflict-panel');
+    expect(conflict?.querySelectorAll('.conflict-courses span')).toHaveLength(2);
+    expect(conflict?.textContent).toContain('CSE1001');
+    expect(conflict?.textContent).toContain('MAT1001 · A11 · SLOT_CLASH');
   });
 
   it('ignores an older validation response after a rapid required-course change', async () => {

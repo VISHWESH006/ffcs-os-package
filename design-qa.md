@@ -1,35 +1,36 @@
-# Login screen visual QA
+# FFCS OS responsive visual QA
 
 final result: blocked
 
 ## Comparison target
 
 - Source visuals: `C:\Users\HPVICTUS\Downloads\preview-desktop.png` (1440 × 3351 px) and `C:\Users\HPVICTUS\Downloads\cover.webp` (1200 × 800 px).
-- Implementation: `frontend/src/auth/AuthGate.tsx` and the authentication styles in `frontend/src/index.css`.
-- Intended implementation viewport: responsive desktop and mobile; target source shows a desktop design system page, not a login screen.
-- State: signed out, Firebase configured, idle Google sign-in button.
+- Implementation: `frontend/src/auth/AuthGate.tsx`, `frontend/src/App.tsx`, and shared application styles in `frontend/src/index.css`.
+- Intended implementation viewport: full desktop and mobile layouts across the authenticated planner pages and sign-in gate. The reference shows a desktop design system page, not the FFCS OS content itself.
+- State: signed out for the login design; authenticated planner pages in their standard states.
 - Implementation screenshot: unavailable. No connected browser capture tool is available in this environment, and the implementation was not launched in a browser.
 
 ## Comparison evidence
 
-The source visuals establish the pearl-gray backdrop, pale blue/lavender aurora, floating white glass surfaces, pill geometry, charcoal controls, and blue accent. The login page code applies those visual tokens to the existing sign-in gate. A rendered screenshot comparison cannot be made, so typography, pixel spacing, contrast at viewport sizes, and actual visual fit remain unverified.
+The source visuals establish the pearl-gray backdrop, pale blue/lavender aurora, floating white glass surfaces, pill geometry, charcoal controls, and blue accent. Shared styles carry these visual tokens across the dashboard, import, course workspace, timetable builder, saved library, and login. Mobile layout rules also constrain comparisons and timetable grids to the viewport and use consistent Lucide icons for the clash relationship. A rendered screenshot comparison cannot be made, so typography, pixel spacing, contrast at viewport sizes, and actual visual fit remain unverified.
 
 ## Fidelity surfaces
 
-- Typography: Inter/system stack retained; rendered comparison unavailable.
-- Spacing and layout: responsive two-column desktop layout with stacked mobile layout; rendered breakpoints unverified.
-- Colors and visual tokens: pearl, soft blue/lavender glow, translucent white, charcoal, and blue accent are implemented in CSS; visual sampling against a browser render unavailable.
-- Imagery and assets: no source photography or illustration is used by the login reference; existing Lucide icons are used for functional interface controls.
-- Copy and interaction: existing Google sign-in action and Firebase error/loading/configuration states are preserved; automated auth tests pass.
+- Typography: Inter/system stack retained and page heading/control sizing increased; rendered comparison unavailable.
+- Spacing and layout: shared card rhythm and glass surfaces applied across pages; mobile grids and tables constrained to viewport width; rendered breakpoints unverified.
+- Colors and visual tokens: pearl, soft blue/lavender glow, translucent white, charcoal, and blue accent implemented in shared application styles; visual sampling against a browser render unavailable.
+- Imagery and assets: no source photography or illustration is used in the reference UI; Lucide icons remain the functional icon set and are prevented from shrinking in flex rows.
+- Copy and interaction: Firebase sign-in, planner actions, and responsive navigation behavior are preserved; conflict relationships use an icon instead of a text arrow; automated frontend tests pass.
 
 ## Findings and blocker
 
-- P1 — Visual verification blocked. A production build and component tests do not establish the rendered layout or visual match. The environment exposes no browser capture tool; no screenshot comparison or interaction check could be performed.
+- P1 — Visual verification blocked. A production build and component tests do not establish the rendered layout or visual match. The environment exposes no browser capture tool; no screenshot comparison or responsive viewport interaction check could be performed.
 
 ## Implementation checklist
 
 - [x] Preserve Firebase sign-in behavior, loading/error states, and accessible button label.
-- [x] Apply responsive frosted-glass visual treatment to the login screen.
+- [x] Apply frosted-glass visual treatment to the login screen and shared styles to every planner page.
+- [x] Constrain the timetable and compare layouts for narrow screens and replace the text conflict arrow with a responsive icon.
 - [x] Run frontend tests and production build.
-- [ ] Open the signed-out screen at desktop and mobile sizes, compare screenshots against the provided references, and fix any visible layout issues.
+- [ ] Open all pages at desktop and mobile sizes, compare screenshots against the provided references, and fix any visible layout issues.
 
