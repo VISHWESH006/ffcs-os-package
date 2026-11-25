@@ -224,20 +224,20 @@ body:has(.app-shell){
 .option-compare.active{background:#eaf4ff;border-color:#bfdef8;color:#176eb8}
 .schedule-preview-panel,.validated-panel{border-radius:24px}
 .schedule-summary>span{border-radius:999px;background:rgba(255,255,255,.72);font-size:10px}
-.timetable-scroll,.screenshot-timetable-scroll{border-radius:15px;overflow:hidden}
-.screenshot-timetable{border-radius:15px}
-.screenshot-timetable th,.screenshot-timetable td{border-color:#dce3ee}
-.screenshot-timetable thead th{background:#e7e4f5;color:#303441}
-.screenshot-timetable .day-heading,.screenshot-timetable .lunch-heading{background:#e7e4f5}
-.screenshot-timetable .day-name{background:#f2f3f7}
-.screenshot-timetable .empty-period{background:rgba(255,255,255,.72)}
-.screenshot-timetable .lunch-cell{background:#eff4fc;color:#687488}
-.screenshot-timetable .timetable-cell{background:#e6f5ef;border-radius:9px;color:#2b5347}
-.screenshot-timetable .timetable-cell-alt{background:#f1edfb}
-.screenshot-timetable .timetable-cell b{color:#293c40}
-.screenshot-timetable .timetable-cell small{color:#69747a}
+.timetable-scroll,.screenshot-timetable-scroll{border-radius:3px;overflow:hidden}
+.screenshot-timetable{border-radius:0}
+.screenshot-timetable th,.screenshot-timetable td{border-color:#78a4d3}
+.screenshot-timetable thead th{background:#d9d1f5;color:#172439}
+.screenshot-timetable .day-heading,.screenshot-timetable .lunch-heading{background:#d9d1f5}
+.screenshot-timetable .day-name{background:#e5e5e5}
+.screenshot-timetable .empty-period{background:#fff9c9}
+.screenshot-timetable .lunch-cell{background:#cfe0fa;color:#17232b}
+.screenshot-timetable .timetable-cell{background:#c9ff3d;border-radius:2px;color:#1d2b22}
+.screenshot-timetable .timetable-cell-alt{background:#e6ff8c}
+.screenshot-timetable .timetable-cell b{color:#173e34}
+.screenshot-timetable .timetable-cell small{color:#31453b}
 .timetable-faculty{color:#49545d}
-.change-teacher-button{border-radius:999px;border-color:#c9dbea;background:rgba(255,255,255,.9);color:#226eae}
+.change-teacher-button{border-radius:4px;border-color:#77a58a;background:#fff;color:#215d43}
 .saved-card{padding:20px}
 .saved-icon{border-radius:50%;background:#eaf4ff;color:#2875b7}
 .saved-title b{font-size:13px;color:#292b31}
