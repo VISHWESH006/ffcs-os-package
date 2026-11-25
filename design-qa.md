@@ -25,12 +25,14 @@ The source visuals establish the pearl-gray backdrop, pale blue/lavender aurora,
 ## Findings and blocker
 
 - P1 — Visual verification blocked. A production build and component tests do not establish the rendered layout or visual match. The environment exposes no browser capture tool; no screenshot comparison or responsive viewport interaction check could be performed.
+- P1 — The latest builder update passed all frontend tests, but Vite production build could not bundle its config because the sandbox denied esbuild access to `../../../../..`. No browser-rendered evidence is available.
 
 ## Implementation checklist
 
 - [x] Preserve Firebase sign-in behavior, loading/error states, and accessible button label.
 - [x] Apply frosted-glass visual treatment to the login screen and shared styles to every planner page.
-- [x] Constrain the timetable and compare layouts for narrow screens and replace the text conflict arrow with a responsive icon.
-- [x] Run frontend tests and production build.
+- [x] Constrain the timetable and compare layouts for narrow screens and replace the conflict arrow glyph with text.
+- [x] Run frontend tests (15 passed).
+- [ ] Complete the production build after resolving the sandbox access denial.
 - [ ] Open all pages at desktop and mobile sizes, compare screenshots against the provided references, and fix any visible layout issues.
 

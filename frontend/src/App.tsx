@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type React from 'react';
 import {
-  ArrowLeftRight, ArrowRight, BookOpen, CalendarDays, Check, CheckCircle2, ChevronDown,
+  ArrowRight, BookOpen, CalendarDays, Check, CheckCircle2, ChevronDown,
   ChevronRight, CircleHelp, Clock3, FileJson2, Filter, GraduationCap, LayoutDashboard,
-  LoaderCircle, LogOut, MapPin, Menu, MoreHorizontal, Printer, Search, Settings2, Sparkles, Trash2,
+  LoaderCircle, LogOut, MapPin, Menu, Printer, Search, Settings2, Sparkles, Trash2,
   Upload, Users, X,
 } from 'lucide-react';
 import { checkApiHealth, deleteAccount as deleteAccountApi, deleteSaved, listSaved, optimize, parseImport, saveTimetable } from './api/client';
@@ -377,13 +377,13 @@ function App() {
     <div className="app-shell">
       <aside className={`sidebar ${mobileNav ? 'sidebar-open' : ''}`}>
         <div className="brand"><span className="brand-mark"><GraduationCap size={20} /></span><div><strong>ffcs<span>os</span></strong><small>STUDENT PLANNER</small></div><button className="icon-btn mobile-close" onClick={() => setMobileNav(false)} aria-label="Close navigation"><X size={18} /></button></div>
-        <div className="term-chip"><span className="status-dot" />LOCAL WORKSPACE <ChevronDown size={13} /></div>
+        <div className="term-chip"><span className="status-dot" />LOCAL WORKSPACE</div>
         {['Workspace', 'Plan', 'Library'].map(group => <div className="nav-group" key={group}><p className="nav-label">{group}</p>{NAV.filter(item => item.group === group).map(item => <button key={item.id} onClick={() => changePage(item.id)} className={`nav-link ${page === item.id ? 'active' : ''}`}><item.icon size={17} /><span>{item.title}</span>{item.id === 'courses' && state.selectedCourses.length > 0 && <i>{state.selectedCourses.length}</i>}</button>)}</div>)}
-        <div className="sidebar-bottom"><div className="local-note"><span className="shield-dot" /><div><b>Your data stays local</b><small>Planner data is stored in this browser.</small></div></div><div className="profile"><div className="avatar">S</div><div><b>Student workspace</b><small>VIT Bhopal</small></div><MoreHorizontal size={18} className="profile-more" /></div></div>
+        <div className="sidebar-bottom"><div className="local-note"><span className="shield-dot" /><div><b>Your data stays local</b><small>Planner data is stored in this browser.</small></div></div><div className="profile"><div className="avatar">S</div><div><b>Student workspace</b><small>VIT Bhopal</small></div></div></div>
       </aside>
       {mobileNav && <button className="scrim" onClick={() => setMobileNav(false)} aria-label="Close navigation" />}
       <main className="main-area">
-        <header className="topbar"><button className="icon-btn mobile-menu" onClick={() => setMobileNav(true)} aria-label="Open navigation"><Menu size={20} /></button><div className="breadcrumbs"><span>FFCS OS</span><ChevronRight size={14} /><b>{activeTitle}</b></div><div className="top-actions"><span className={`api-status ${apiReady === false ? 'api-disconnected' : ''}`}><span className="status-dot" />{apiReady === null ? 'Checking API' : apiReady ? 'API connected' : 'API unavailable'}</span><span className="account-email">{user?.email}</span><button className="icon-btn auth-action" onClick={() => void signOut()} aria-label="Sign out" title="Sign out"><LogOut size={17} /></button><button className="icon-btn auth-action auth-delete" onClick={() => void deleteAccount()} aria-label="Delete account" title="Delete account"><Trash2 size={17} /></button></div></header>
+        <header className="topbar"><button className="icon-btn mobile-menu" onClick={() => setMobileNav(true)} aria-label="Open navigation"><Menu size={20} /></button><div className="breadcrumbs"><span>FFCS OS</span><b>{activeTitle}</b></div><div className="top-actions"><span className={`api-status ${apiReady === false ? 'api-disconnected' : ''}`}><span className="status-dot" />{apiReady === null ? 'Checking API' : apiReady ? 'API connected' : 'API unavailable'}</span><span className="account-email">{user?.email}</span><button className="icon-btn auth-action" onClick={() => void signOut()} aria-label="Sign out" title="Sign out"><LogOut size={17} /></button><button className="icon-btn auth-action auth-delete" onClick={() => void deleteAccount()} aria-label="Delete account" title="Delete account"><Trash2 size={17} /></button></div></header>
         <div className="page-wrap">
           {storageIssue && <div role="alert" className="notice notice-error"><span>{storageIssue}</span></div>}
           {notice && <div role="status" className={`notice notice-${notice.type}`}><span>{notice.text}</span><button onClick={() => setNotice(null)} aria-label="Dismiss notice"><X size={16} /></button></div>}
@@ -490,18 +490,17 @@ function BuilderPage({ state, validationAttempt, selectedCourses, alternatives, 
           <div className="panel-head"><div><p className="eyebrow">STEP 1 · YOUR ROUTINE</p><h2>What works for your week?</h2></div><Settings2 size={18} className="muted-icon" /></div>
           <div className="preferences-grid">
             <label>Planning mode<select value={state.preferences.mode} onChange={event => onPreference('mode', event.target.value as Preferences['mode'])}><option value="PLANNING">Explore options, including full or unknown seats</option><option value="LIVE_REGISTRATION">Only use offerings with confirmed seats</option></select></label>
-            <label>Class-time preference<select value={state.preferences.timePreference} onChange={event => onPreference('timePreference', event.target.value as Preferences['timePreference'])}><option value="balanced">No preference</option><option value="morning">Prefer earlier classes</option><option value="evening">Prefer later classes</option></select></label>
+            <PreferenceChoice label="Class-time preference" value={state.preferences.timePreference} options={[{ value: 'balanced', label: 'No preference' }, { value: 'morning', label: 'Prefer earlier classes' }, { value: 'evening', label: 'Prefer later classes' }]} onChange={value => onPreference('timePreference', value)} />
             <label>Student routine<select value={state.preferences.dayScholar ? 'day-scholar' : 'flexible'} onChange={event => onPreference('dayScholar', event.target.value === 'day-scholar')}><option value="flexible">Campus resident / flexible commute</option><option value="day-scholar">Day scholar · prefer to finish by 6 PM</option></select><small className="preference-help">This is a soft preference. Later classes remain eligible and are scored lower; earlier daily finishes are preferred.</small></label>
             <label>Preferred day off<select value={state.preferences.preferredFreeDay ?? ''} onChange={event => onPreference('preferredFreeDay', event.target.value || null)}><option value="">No preference</option>{['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(day => <option key={day} value={day}>{({ MON: 'Monday', TUE: 'Tuesday', WED: 'Wednesday', THU: 'Thursday', FRI: 'Friday', SAT: 'Saturday' } as Record<string, string>)[day]}</option>)}</select></label>
             <label>Maximum gap between classes<select value={state.preferences.maxGap} onChange={event => onPreference('maxGap', Number(event.target.value))}><option value={0}>0 free periods</option><option value={1}>1 free period</option><option value={2}>2 free periods</option><option value={3}>3 free periods</option><option value={4}>4 free periods</option></select></label>
-            <label className="check-setting"><input type="checkbox" checked={state.preferences.mandatoryLunch} onChange={event => onPreference('mandatoryLunch', event.target.checked)} />Keep the lunch period free</label>
-            {state.preferences.mandatoryLunch && <small className="preference-help">Optional soft preference for any student. The optimizer favors keeping 1:15–2:45 PM free, especially after an 11:40 AM class; it never blocks otherwise valid schedules.</small>}
+            <div className="preference-lunch-setting"><button type="button" className={`lunch-toggle ${state.preferences.mandatoryLunch ? 'enabled' : ''}`} aria-pressed={state.preferences.mandatoryLunch} onClick={() => onPreference('mandatoryLunch', !state.preferences.mandatoryLunch)}><span className="lunch-switch" aria-hidden="true"><span /></span><span className="lunch-toggle-copy"><b>Keep the lunch period free</b><small>Optional soft preference</small></span><span className="lunch-toggle-state">{state.preferences.mandatoryLunch ? 'On' : 'Off'}</span></button>{state.preferences.mandatoryLunch && <small className="preference-help">Favors keeping 1:15–2:45 PM free, especially after an 11:40 AM class. It never blocks a valid schedule.</small>}</div>
           </div>
           <div className="builder-actions"><span>{selectedCourses.length} required course{selectedCourses.length === 1 ? '' : 's'} · {selectedCourses.reduce((sum, course) => sum + course.credits, 0)} credits</span><button className="btn btn-primary" onClick={onGenerate} disabled={busy || selectedCourses.length === 0}>{busy ? <LoaderCircle size={16} className="spin" /> : <Sparkles size={16} />}{alternatives.length ? 'Refresh schedule options' : 'Show schedule options'}</button></div>
           {!selectedCourses.length && <p className="preference-help">First choose your required courses in Course workspace.</p>}
         </div>
 
-          {validationAttempt && (!validationAttempt.selectionValid || validationAttempt.selectionErrors.length > 0 || validationAttempt.selectionConflicts.length > 0) && <div className="panel conflict-panel"><div className="panel-head"><div><p className="eyebrow">CHECK YOUR CHOICE</p><h2>This combination needs changes</h2></div><X size={18} /></div>{validationAttempt.selectionConflicts.map((conflict, index) => <p key={`c-${index}`}><b className="conflict-courses">{conflict.courseCodes.map((code, codeIndex) => <span key={code}>{codeIndex > 0 && <ArrowLeftRight size={13} aria-hidden="true" />}{code}</span>)}</b><span> · {conflict.slots.join(', ')} · {conflict.reason}</span></p>)}{validationAttempt.selectionErrors.map((error, index) => <p key={`e-${index}`}><b>{error.courseCode ?? 'Offering'}</b> · {error.reason}</p>)}{validationAttempt.excludedOfferings.map((error, index) => <p key={`x-${index}`}><b>{error.courseCode ?? 'Offering'}</b> · {error.reason}</p>)}</div>}
+          {validationAttempt && (!validationAttempt.selectionValid || validationAttempt.selectionErrors.length > 0 || validationAttempt.selectionConflicts.length > 0) && <div className="panel conflict-panel"><div className="panel-head"><div><p className="eyebrow">CHECK YOUR CHOICE</p><h2>This combination needs changes</h2></div><X size={18} /></div>{validationAttempt.selectionConflicts.map((conflict, index) => <p key={`c-${index}`}><b>{conflict.courseCodes.join(' conflicts with ')}</b><span> · {conflict.slots.join(', ')} · {conflict.reason}</span></p>)}{validationAttempt.selectionErrors.map((error, index) => <p key={`e-${index}`}><b>{error.courseCode ?? 'Offering'}</b> · {error.reason}</p>)}{validationAttempt.excludedOfferings.map((error, index) => <p key={`x-${index}`}><b>{error.courseCode ?? 'Offering'}</b> · {error.reason}</p>)}</div>}
 
         {alternatives.length > 0 && <section className="alternatives-section">
           <div className="section-title"><div><p className="eyebrow">STEP 2 · COMPARE</p><h2>{alternatives.length} schedule option{alternatives.length === 1 ? '' : 's'}</h2></div><span className="muted-small">Preview an option, or select two to compare.</span></div>
@@ -524,6 +523,15 @@ function BuilderPage({ state, validationAttempt, selectedCourses, alternatives, 
       </aside>
     </div>
   </>;
+}
+
+function PreferenceChoice<T extends string>({ label, value, options, onChange }: { label: string; value: T; options: { value: T; label: string }[]; onChange: (value: T) => void }) {
+  return <div className="preference-choice-field">
+    <span className="preference-choice-label">{label}</span>
+    <div className="preference-choice-group" role="group" aria-label={label}>
+      {options.map(option => <button key={option.value} type="button" className={value === option.value ? 'selected' : ''} aria-pressed={value === option.value} onClick={() => onChange(option.value)}>{option.label}</button>)}
+    </div>
+  </div>;
 }
 
 function TimetableOptionCard({ timetable, previewing, selected, comparing, canCompare, onPreview, onToggleCompare }: { timetable: RankedTimetable; previewing: boolean; selected: boolean; comparing: boolean; canCompare: boolean; onPreview: () => void; onToggleCompare: () => void }) {

@@ -88,7 +88,7 @@ describe('student timetable workflow', () => {
     expect(await screen.findByText('Validated timetable saved.')).toBeInTheDocument();
     expect(api.optimize).toHaveBeenCalledTimes(2); // Selection validation plus a fresh backend check immediately before save.
     expect(api.saveTimetable).toHaveBeenCalledWith('My timetable', '{"schemaVersion":"1.5.0","courses":[]}', expect.objectContaining({ mode: 'LIVE_REGISTRATION' }), ['CSE1001', 'MAT1001'], { CSE1001: 'cse-a', MAT1001: 'mat-b' });
-    fireEvent.change(screen.getAllByRole('combobox')[1], { target: { value: 'evening' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Prefer later classes' }));
     expect(screen.queryByRole('button', { name: /export json/i })).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /course workspace/i }));
 
@@ -98,10 +98,7 @@ describe('student timetable workflow', () => {
     expect(screen.queryByRole('button', { name: /export json/i })).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /timetable builder/i }));
     expect(screen.getByRole('heading', { name: 'This combination needs changes' })).toBeInTheDocument();
-    const conflict = document.querySelector('.conflict-panel');
-    expect(conflict?.querySelectorAll('.conflict-courses span')).toHaveLength(2);
-    expect(conflict?.textContent).toContain('CSE1001');
-    expect(conflict?.textContent).toContain('MAT1001 · A11 · SLOT_CLASH');
+    expect(document.querySelector('.conflict-panel')?.textContent).toContain('CSE1001 conflicts with MAT1001 · A11 · SLOT_CLASH');
   });
 
   it('ignores an older validation response after a rapid required-course change', async () => {
@@ -132,8 +129,8 @@ describe('student timetable workflow', () => {
     await importFixture();
     expect(screen.queryByRole('button', { name: /slot explorer/i })).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: /timetable builder/i }));
-    expect(screen.getByRole('checkbox', { name: /keep the lunch period free/i })).toBeInTheDocument();
-    expect(screen.getAllByRole('combobox')[2]).toHaveValue('flexible');
+    expect(screen.getByRole('button', { name: /keep the lunch period free/i })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getAllByRole('combobox')[1]).toHaveValue('flexible');
   });
 
   it('requires backend validation before displaying save or export actions', async () => {
@@ -148,16 +145,18 @@ describe('student timetable workflow', () => {
     render(<App />);
     await importFixture();
     fireEvent.click(screen.getByRole('button', { name: /timetable builder/i }));
-    const routine = screen.getAllByRole('combobox')[2];
-    const lunch = screen.getByRole('checkbox', { name: /keep the lunch period free/i });
-    expect(lunch).toBeChecked();
-    expect(lunch).toBeEnabled();
+    const routine = screen.getAllByRole('combobox')[1];
+    const lunch = screen.getByRole('button', { name: /keep the lunch period free/i });
+    expect(lunch).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.click(lunch);
+    expect(lunch).toHaveAttribute('aria-pressed', 'false');
     fireEvent.change(routine, { target: { value: 'day-scholar' } });
-    expect(lunch).toBeChecked();
+    expect(lunch).toHaveAttribute('aria-pressed', 'false');
     expect(lunch).toBeEnabled();
     fireEvent.change(routine, { target: { value: 'flexible' } });
-    expect(lunch).toBeEnabled();
-    expect(lunch).toBeChecked();
+    expect(lunch).toHaveAttribute('aria-pressed', 'false');
+    fireEvent.click(lunch);
+    expect(lunch).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('exports the exact selected offering IDs only for a current backend validation', () => {
