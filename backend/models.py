@@ -73,7 +73,6 @@ class PreferencesInput(BaseModel):
     selectedOfferings: Optional[Dict[str, str]] = None
 
     preferredFreeDay: Optional[str] = None
-    avoidEarlyMorning: Optional[bool] = False
     walkingPriority: Optional[bool] = True
     dayScholar: Optional[bool] = False
 
@@ -90,6 +89,8 @@ class PreferencesInput(BaseModel):
     prioritizeDifficulty: Optional[bool] = None
     prioritizeAttendance: Optional[bool] = None
     avoidSaturday: Optional[bool] = None
+    # Retained for older clients; the removed control no longer affects ranking.
+    avoidEarlyMorning: Optional[bool] = False
 
 
 class Preferences(PreferencesInput):

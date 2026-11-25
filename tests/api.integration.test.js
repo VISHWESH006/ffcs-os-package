@@ -21,6 +21,23 @@ async function freePort() {
   return port;
 }
 
+async function waitForApiHealth(child, url, getLogs, timeoutMs = 10000) {
+  const deadline = Date.now() + timeoutMs;
+  let lastError = '';
+  while (Date.now() < deadline) {
+    if (child.exitCode !== null || child.signalCode !== null) break;
+    try {
+      const response = await fetch(url, { signal: AbortSignal.timeout(750) });
+      if (response.ok) return true;
+      lastError = `health returned HTTP ${response.status}`;
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : String(error);
+    }
+    await new Promise(resolveWait => setTimeout(resolveWait, 100));
+  }
+  assert.fail(`API did not become healthy (${lastError}): ${getLogs()}`);
+}
+
 test('actual Node API → Python CLI → DataStore → parser and optimizer', async t => {
   let python;
   try {
@@ -39,21 +56,13 @@ test('actual Node API → Python CLI → DataStore → parser and optimizer', as
     const apiChild = spawn(process.execPath, [api], { cwd: join(root, 'api-server'), env: apiEnv, stdio: ['ignore', 'pipe', 'pipe'] });
     apiChild.stdout.on('data', chunk => logs += chunk.toString());
     apiChild.stderr.on('data', chunk => logs += chunk.toString());
+    apiChild.on('error', error => logs += `API process spawn error: ${error.stack ?? error.message}\n`);
     return apiChild;
   };
   let child = startApi();
   const base = `http://127.0.0.1:${port}/api`;
   try {
-    let ready = false;
-    for (let i = 0; i < 40; i++) {
-      if (child.exitCode !== null) break;
-      try {
-        const response = await fetch(`${base}/healthz`);
-        if (response.ok) { ready = true; break; }
-      } catch { /* server is still starting */ }
-      await new Promise(r => setTimeout(r, 250));
-    }
-    assert.ok(ready, `API did not start: ${logs}`);
+    await waitForApiHealth(child, `${base}/healthz`, () => logs);
     try {
       execFileSync(python, ['-c', 'import pydantic, ortools'], { stdio: 'ignore' });
     } catch {
@@ -154,6 +163,16 @@ test('actual Node API → Python CLI → DataStore → parser and optimizer', as
     assert.equal(independentDayScholarLunchResponse.status, 200, logs);
     const independentDayScholarLunch = await independentDayScholarLunchResponse.json();
     assert.ok(independentDayScholarLunch.timetables.length > 0);
+
+    const dayScholarApiResponse = await fetch(`${base}/optimize`, { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ subjects: [{ courseCode: 'CSE9001', courseName: 'Day Scholar regression', credits: 3, options: [
+        { offeringId: 'before-six', facultyName: 'Faculty Early', slot: 'B21', slots: ['B21'], slotVerificationStatus: 'CONFIRMED_THEORY', seatState: 'OPEN', seatsAvailable: 5, componentType: 'Theory' },
+        { offeringId: 'after-six', facultyName: 'Faculty Late', slot: 'C21', slots: ['C21'], slotVerificationStatus: 'CONFIRMED_THEORY', seatState: 'OPEN', seatsAvailable: 5, componentType: 'Theory' },
+      ] }], preferences: { mode: 'PLANNING', dayScholar: true }, topN: 5 }) });
+    assert.equal(dayScholarApiResponse.status, 200, logs);
+    const dayScholarApiResult = await dayScholarApiResponse.json();
+    assert.deepEqual(dayScholarApiResult.timetables.map(tt => tt.courses[0].offeringId), ['before-six', 'after-six']);
+    assert.equal(dayScholarApiResult.timetables[1].courses[0].slot, 'C21', 'after-6 PM schedules remain feasible and returnable');
 
     const selectedIds = {
       CSE1001: parsed.subjects[0].options[0].offeringId,
@@ -285,16 +304,7 @@ test('actual Node API → Python CLI → DataStore → parser and optimizer', as
     previousProcess.kill();
     await processExit;
     child = startApi();
-    let restartedReady = false;
-    for (let i = 0; i < 40; i++) {
-      if (child.exitCode !== null) break;
-      try {
-        const response = await fetch(`${base}/healthz`);
-        if (response.ok) { restartedReady = true; break; }
-      } catch { /* restarted process is still starting */ }
-      await new Promise(resolveWait => setTimeout(resolveWait, 250));
-    }
-    assert.ok(restartedReady, `API did not restart after concurrent writes: ${logs}`);
+    await waitForApiHealth(child, `${base}/healthz`, () => logs);
     const afterRestart = await fetch(`${base}/timetables`);
     assert.equal(afterRestart.status, 200);
     const restartedRecords = await afterRestart.json();

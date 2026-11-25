@@ -5,6 +5,7 @@ from backend.data_loader import DataStore
 from backend.models import FacultyOption, OptimizeInput, PreferencesInput, Subject
 from backend.optimizer import (
     TimetableSolutionCallback, _official_periods, _schedule_final_valid,
+    _score_day_scholar_meetings,
     _score_gaps, _score_lunch, compute_score, optimize, slots_clash,
 )
 
@@ -253,6 +254,77 @@ def test_day_scholar_and_lunch_preferences_are_independent():
         preferences=PreferencesInput(mode="PLANNING", dayScholar=True, mandatoryLunch=True)))
     assert result.timetables
     assert result.mode == "PLANNING"
+
+
+def test_day_scholar_prefers_530_finish_to_630_finish():
+    # This isolates finish-time scoring. The official slot map has no exact
+    # 17:30 or 18:30 end times; end-to-end behavior is covered below using it.
+    finish_530 = _score_day_scholar_meetings([("MON", "17:00", "17:30", "fixture")])
+    finish_630 = _score_day_scholar_meetings([("MON", "18:00", "18:30", "fixture")])
+    assert finish_530 > finish_630
+    assert finish_530 > 0.9
+    assert finish_630 < 0.9
+
+
+def test_day_scholar_strongly_rewards_by_six_and_penalizes_later_finish_progressively():
+    finish_by_six = _score_day_scholar_meetings([("MON", "16:25", "18:00", "fixture")])
+    five_minutes_late = _score_day_scholar_meetings([("MON", "18:00", "18:05", "fixture")])
+    six_thirty = _score_day_scholar_meetings([("MON", "18:00", "18:30", "fixture")])
+    latest_official = _score_day_scholar_meetings([("MON", "18:00", "19:30", "fixture")])
+    assert finish_by_six == 0.9
+    assert finish_by_six > five_minutes_late > six_thirty > latest_official
+    assert latest_official == 0.0
+
+
+def test_day_scholar_prefers_official_before_six_finish_but_keeps_late_alternative():
+    subject = _subject("CSE1001", _option("B21"), _option("C21", faculty="Faculty B"))
+    inp = OptimizeInput(subjects=[subject], preferences=PreferencesInput(
+        mode="PLANNING", dayScholar=True,
+    ), topN=5)
+    result = optimize(inp)
+    assert [tt.courses[0].slot for tt in result.timetables][0] == "B21"  # Ends 17:55.
+    assert "C21" in [tt.courses[0].slot for tt in result.timetables]  # Ends 19:30; remains valid.
+    assert all(_schedule_final_valid(tt, inp) for tt in result.timetables)
+
+
+def test_day_scholar_late_only_offering_is_not_infeasible():
+    result = optimize(OptimizeInput(subjects=[_subject("CSE1001", _option("C21"))],
+        preferences=PreferencesInput(mode="PLANNING", dayScholar=True)))
+    assert result.timetables
+    assert result.timetables[0].courses[0].slot == "C21"
+    assert result.infeasibleCourses == []
+
+
+def test_conflicting_soft_preferences_return_valid_alternatives():
+    subject = _subject("CSE1001", _option("C11"), _option("C21", faculty="Faculty B"))
+    prefs = PreferencesInput(mode="PLANNING", dayScholar=True, mandatoryLunch=True,
+                             preferredFreeDay="MON", maxGap=0)
+    result = optimize(OptimizeInput(subjects=[subject], preferences=prefs, topN=5))
+    assert {tt.courses[0].slot for tt in result.timetables} == {"C11", "C21"}
+    assert result.feasibleCount == 2
+    assert all(_schedule_final_valid(tt, OptimizeInput(subjects=[subject], preferences=prefs))
+               for tt in result.timetables)
+
+
+def test_morning_preference_can_fall_back_to_post_lunch_without_rejecting_schedule():
+    result = optimize(OptimizeInput(subjects=[_subject("CSE1001", _option("A21"))],
+        preferences=PreferencesInput(mode="PLANNING", timePreference="morning")))
+    assert result.timetables
+    assert result.timetables[0].courses[0].slot == "A21"
+    assert result.policyFallbackNote is not None
+
+
+def test_retired_early_class_and_unrequested_saturday_bias_do_not_change_score():
+    monday = _option("A11")
+    saturday = _option("D13")
+    monday_subject = _subject("CSE1001", monday)
+    saturday_subject = _subject("CSE1001", saturday)
+    baseline = compute_score([(monday_subject, monday)], PreferencesInput(mode="PLANNING"))
+    old_early_flag = compute_score([(monday_subject, monday)],
+        PreferencesInput(mode="PLANNING", avoidEarlyMorning=True))
+    saturday_score = compute_score([(saturday_subject, saturday)], PreferencesInput(mode="PLANNING"))
+    assert old_early_flag.overall == baseline.overall
+    assert saturday_score.overall == baseline.overall
 
 
 def test_unmapped_venue_travel_is_unknown_not_perfect():

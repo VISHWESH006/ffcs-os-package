@@ -51,7 +51,7 @@ React 18 + Vite, Tailwind CSS v4, shadcn/ui, Wouter routing, TanStack Query.
 |-------|---------|
 | `/` | Landing — project overview and feature list |
 | `/import` | Paste VTOP JSON, parse, quick-optimize |
-| `/preferences` | Configure all soft-constraint weights |
+| `/preferences` | Configure timetable preferences |
 | `/results` | Browse top-20 ranked timetables |
 | `/compare` | Side-by-side comparison of 2 saved timetables |
 | `/saved` | Manage saved favourites |
@@ -84,23 +84,16 @@ Variables:
   choice[i] ∈ {0 … |options[i]|-1}   one integer per subject
 
 Hard constraints:
-  ∀ i1≠i2, j1, j2: if slots(option[i1][j1]) ∩ slots(option[i2][j2]) ≠ ∅
-      → NOT (choice[i1]=j1 ∧ choice[i2]=j2)
-  if preferred_free_day set:
-      ∀ i: choice[i] ≠ j  for all j that have class on that day
+  every required subject has exactly one eligible offering
+  verified slot codes, mode-specific seat rules, and no overlapping meetings
+  Evening policy excludes 08:30 offerings
 
-Objective (maximise, scaled ×1000):
-  Σᵢ score(choice[i])
-
-  score(option) = teacher_rating
-               + seat_bonus
-               − saturday_penalty
-               − early_morning_penalty
-               ± time_preference_bonus
-               − walking_penalty
+Search:
+  enumerate complete clash-free assignments, up to 8 seconds
+  score each full timetable in the callback and retain top-N
 ```
 
-The solver runs with `enumerate_all_solutions=True` + 8s time limit, collecting up to 60 feasible solutions via callback. After solving, solutions are re-ranked by a detailed multi-factor score and the top-N returned.
+There is no CP-SAT weighted objective shortlist that can discard a better complete schedule before ranking. Morning and Evening apply separate lexicographic policy tiers before the soft score. The documented score weights and soft Day Scholar, lunch, gap, preferred-day, and verified-travel behavior are in [OPTIMIZATION_FLOW.md](OPTIMIZATION_FLOW.md). Faculty ratings do not affect the objective. Soft preferences, including preferred free day and Day Scholar finish time, are not hard constraints.
 
 ### 4. Browser Extension (`browser-extension/`)
 

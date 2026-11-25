@@ -1,43 +1,70 @@
-﻿# Timetable optimization behavior
+# Timetable optimization behavior
 
-## Constraints and preferences
+## Recovered requirements and constraint classes
 
-### Hard constraints
+### Hard scheduling constraints
 
-- Every requested course must appear once.
-- Every selected slot must be present in the verified slot map; no unverified slot can bypass clash checking.
-- Courses cannot overlap in any expanded meeting.
-- LIVE_REGISTRATION requires known, positive seats. PLANNING retains full or unknown-seat offerings.
-- A Day Scholar cannot have the 18:00 period.
-- Evening policy excludes an offering if any expanded meeting starts at 08:30.
+- Every requested course must appear exactly once; a course is never silently dropped.
+- Each selected offering must have a verified slot and a faculty identity. Combined slots expand to all atomic meetings.
+- No two selected courses may overlap in any expanded meeting.
+- `LIVE_REGISTRATION` requires known, positive seats. `PLANNING` may retain full or unknown-seat offerings.
+- A student's exact selected offering must remain selected and pass the same slot, seat-mode, and full-timetable clash validation.
+- In the selected `evening` policy, offerings containing an 08:30 meeting are excluded. This is the explicit Evening boundary; it is not a general early-class preference.
 
-These are eligibility rules. The final independent validator checks required-course coverage, offering identity, slot verification, seat eligibility, Day Scholar cutoff, Evening's 08:30 restriction, and clashes.
+The independent final validator checks course coverage, offering identity, verified slots, registration-mode seat eligibility, Evening's 08:30 boundary, and clashes. It does not reject a timetable for a soft preference.
 
 ### Selected scheduling policy
 
-`timePreference` is one of `morning`, `evening`, or `balanced` and is independent from `mode` (`PLANNING` or `LIVE_REGISTRATION`).
+`timePreference` (`morning`, `evening`, or `balanced`) is separate from registration `mode` (`PLANNING` or `LIVE_REGISTRATION`). Morning and Evening policy tiers rank eligible complete schedules before the general soft score:
 
-- Morning candidates are compared first by fewest meetings starting at or after 13:15, then by the sum of the verified end times of each class day’s final meeting, then by the complete soft score. Later classes remain eligible. `policyFallbackNote` says only that at least one returned alternative includes a post-lunch meeting; it does not imply every alternative needs fallback.
-- Evening candidates cannot include 08:30. Among the remaining feasible assignments, the optimizer first minimizes all meetings before 13:15, then minimizes 10:05 meetings (so 11:40 is preferred as the earlier fallback), then applies the complete soft score. `policyFallbackNote` says only that at least one returned alternative uses an earlier-than-13:15 fallback.
-- Balanced uses the complete soft score without a morning/evening tier.
+- **Morning:** minimize meetings starting at or after 13:15; then minimize the sum of verified actual end times for each teaching day's last class; then compare the complete soft score. Afternoon classes remain eligible. The fallback note reports when returned alternatives include post-lunch meetings.
+- **Evening:** exclude offerings containing 08:30; then minimize meetings before 13:15; then minimize 10:05 fallback meetings, which puts an 11:40 fallback ahead of 10:05; then compare the complete soft score. The fallback note describes returned alternatives that use an earlier period.
+- **Balanced:** use the complete soft score without Morning/Evening policy tiers.
+
+These selected-mode policy tiers are a separate ranking layer. They do not turn soft preferences into feasibility rules. Enumeration retains the best `topN` across complete feasible assignments, not just a truncated CP-SAT candidate pool.
 
 ### Soft preferences
 
-The full score used for ranking includes gap compactness (`maxGap`), preferred free day, Saturday and early-class preferences, Day Scholar day/finish preference, lunch, known venue travel, and time preference. Gap order is derived from the seven unique official periods in `backend/data/slots.csv`; consecutive periods have zero gap, and omitted periods between meetings count as genuine gaps. Lunch is independent of Day Scholar and remains soft; it never rejects a valid timetable. Each occupied 11:40 or 13:15 period gets the same soft cost, and using both on one day adds a further same-day cost. Turning `mandatoryLunch` off removes all lunch penalties.
+- **Day Scholar:** prefer every teaching day to finish by 18:00 and prefer earlier daily finishes. A later class remains eligible and receives a lower score. The score uses the verified end time of each day's final class; it does not optimize campus-day count.
+- **Lunch:** when `mandatoryLunch` is enabled, prefer the lunch-adjacent period to remain free. Using both 11:40 and 13:15 on the same day incurs an additional score cost. The name is retained for API compatibility; it is never a hard constraint. Day Scholar and lunch are independent.
+- **Compactness:** `maxGap` changes gap penalties. `maxGap: 0` increases the penalty for genuine gaps; it never rejects a timetable.
+- **Preferred day off:** lower score if the selected day has classes; the schedule remains eligible.
+- **Venue travel:** `walkingPriority` only scores known distances between confirmed physical buildings. Unknown mappings remain unknown; unknown travel cannot reject or favor a schedule.
+- **Time preference:** outside the separate Morning/Evening policy tiers, its score is part of the general soft score.
+
+The retired “Avoid the earliest classes” control is ignored for compatibility. Saturday is not penalized without a recovered active user preference. Faculty ratings, difficulty, and attendance preferences remain excluded from optimization.
+
+## Score weights and penalty boundaries
+
+`compute_score` retains its existing top-level weights:
+
+| Score component | Weight |
+|---|---:|
+| Official-period gap compactness | 30% |
+| Configured preference match | 25% |
+| Verified venue travel | 20% |
+| Lunch | 15% |
+| Time preference | 10% |
+
+The weights are normalized over the components present. Travel is omitted when disabled or when no verified transition can be scored. Within the preference-match component, only selected preferences participate: a selected preferred day and Day Scholar finish score are averaged when both are enabled; an unset preference contributes no penalty. When Day Scholar is the only selected preference in this component, it receives the full 25% component weight. Morning/Evening policy tiers rank before this weighted score as described above.
+
+The Day Scholar subscore is computed per teaching day from verified period end times. Finishes by 18:00 score from 0.9 to 1.0, with earlier finishes slightly preferred. Finishes after 18:00 score below 0.9 and decline linearly to 0 at the latest official finish. The Day Scholar setting contributes through the configured preference-match component; it cannot override hard constraints or make an otherwise-valid schedule infeasible.
+
+Gap ordering comes from the seven unique periods in `backend/data/slots.csv`. Consecutive official periods have no artificial gap; omitted periods between classes count as genuine gaps.
 
 ## Search and optimality
 
-CP-SAT enumerates clash-free assignments and evaluates the complete timetable score as each assignment is found. It retains the best `topN` according to the selected policy tier followed by the full score; it does not rank a bounded CP-SAT objective shortlist afterward. The search limit is eight seconds. `feasibleCount` is the number of feasible assignments visited, not the number of returned timetables. It is the total feasible count only when `optimizationOptimal: true`, which means CP-SAT completed enumeration. If the time limit interrupts enumeration, the API returns the best assignments found so far with `optimizationOptimal: false`; global best and total feasible count are then unproven.
-
-Morning and Evening are lexicographic policy priorities above soft score. In Morning, post-lunch meeting count and daily finish-time sum are the first two ranking fields. In Evening, pre-13:15 meeting count and then 10:05 fallback count are the first two ranking fields. Other soft preferences are combined by the score weights in `compute_score`.
+CP-SAT enumerates clash-free complete assignments for up to eight seconds. The callback scores each full assignment and retains up to the requested top N. `feasibleCount` is the number visited, not the number returned. It is the total feasible count only when `optimizationOptimal: true`. If enumeration times out, the optimizer returns the best assignments visited so far and reports global optimality as unproven.
 
 ## Venue travel limits
 
-Only `FacultyOption.building` codes in `DataStore.CONFIRMED_PHYSICAL_CODES` and directed edges present in `backend/data/buildings.csv` are used. A room string is not parsed into a building code by the scoring function. A transition without a confirmed mapping contributes to `travelUnknownTransitions`; travel score is `null` when no transition is mapped. If some transitions are mapped, the score covers only those known transitions and the known/unknown counts expose incomplete coverage. Unknown mappings are not assigned zero minutes, and no global travel optimum is claimed. Current venue/building mappings have not been independently verified for completeness or provenance.
+Only confirmed physical `FacultyOption.building` codes and directed edges present in `backend/data/buildings.csv` contribute. Room strings are not parsed into building codes by the scoring function. Unknown transitions are counted separately; travel score is `null` when no transition is mapped. If only some transitions are mapped, the score covers those known transitions and exposes the unknown count. Unknown mappings are not assigned zero minutes, and no global travel optimum is claimed. Current venue/building mappings have not been independently verified for completeness or provenance.
 
-## Lunch preference
+## Compatibility fields with unresolved semantics
 
-“Keep the lunch period free” is a soft score preference for every student. `dayScholar` affects only the Day Scholar cutoff and score; it does not enable, disable, or clear `mandatoryLunch`.
+`maxClassesPerDay` remains accepted by the request model, but the optimizer does not enforce it and the current planner has no control for it. Older API documentation describes it as a hard cap but gives a different default than the current model; available project history does not resolve whether a combined offering should count as one class or multiple periods. It is therefore not silently imposed as a new hard rule.
+
+`avoidEarlyMorning` and `avoidSaturday` remain accepted for older clients but are ignored. This preserves request compatibility without applying preferences that were removed or are not currently selected in the planner.
 
 ## Actual implementation flow
 
@@ -47,22 +74,20 @@ flowchart TD
   B -- No --> X[API returns HTTP 400]
   B -- Yes --> C[Filter missing faculty, unverified slots and mode-ineligible seats]
   C --> D{Selected policy is Evening?}
-  D -- Yes --> E[Exclude any offering containing 08:30]
-  D -- No --> F{Day Scholar?}
-  E --> F
-  F -- Yes --> G[Exclude any offering containing 18:00]
-  F -- No --> H[Build one choice per required course]
-  G --> H
-  H --> I[CP-SAT hard no-overlap constraints]
-  I --> J[Enumerate feasible assignments, max 8 seconds]
-  J --> K[Score each full assignment: official-period gaps, symmetric lunch, mapped travel and preferences]
-  K --> L{Morning?}
-  L -- Yes --> M[Sort by late meetings, daily finish sum, then full score]
-  L -- No --> N{Evening?}
-  N -- Yes --> O[Sort by pre-13:15 count, then 10:05 fallback count, then full score]
-  N -- No --> P[Sort by full score]
-  M --> Q[Keep top N and independently validate]
-  O --> Q
-  P --> Q
-  Q --> R[Return visited feasible count, count completeness, fallback note and optimality status]
+  D -- Yes --> E[Exclude offerings containing 08:30]
+  D -- No --> F[Keep all otherwise eligible offerings]
+  E --> G[Build one choice per required course]
+  F --> G
+  G --> H[CP-SAT hard no-overlap constraints]
+  H --> I[Enumerate complete feasible assignments for up to 8 seconds]
+  I --> J[Score complete schedules: gaps, configured preferences, lunch, known travel and time]
+  J --> K{Morning?}
+  K -- Yes --> L[Rank post-lunch count, actual daily finish sum, then soft score]
+  K -- No --> M{Evening?}
+  M -- Yes --> N[Rank pre-13:15 count, 10:05 fallback count, then soft score]
+  M -- No --> O[Rank by complete soft score]
+  L --> P[Keep top N and independently validate hard constraints]
+  N --> P
+  O --> P
+  P --> Q[Return visited count, optimality and accurate fallback note]
 ```

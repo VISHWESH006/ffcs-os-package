@@ -192,20 +192,6 @@ def _score_morning(options: List[FacultyOption], time_preference: str) -> float:
     return 1.0 - abs(ratio - 0.5) * 2   # balanced: peak at 0.5
 
 
-def _score_saturday(options: List[FacultyOption]) -> float:
-    """Always penalise Saturday slots (VIT Bhopal: online-only day)."""
-    n = sum(1 for opt in options for d, _, _, _ in expand_slot(opt.slot) if d == "SAT")
-    return max(0.0, 1.0 - n * 0.45) if n else 1.0
-
-
-def _score_early_morning(options: List[FacultyOption], avoid: bool) -> float:
-    """Penalise 08:00 / 08:30 classes when avoid_early_morning is enabled."""
-    if not avoid:
-        return 1.0
-    n = sum(1 for opt in options for _, ts, _, _ in expand_slot(opt.slot) if ts in ("08:00", "08:30"))
-    return max(0.0, 1.0 - n * 0.25) if n else 1.0
-
-
 def _score_free_day(options: List[FacultyOption], preferred: Optional[str]) -> float:
     """1.0 if preferred free day has no classes, else 0.0."""
     if not preferred:
@@ -218,16 +204,45 @@ def _score_free_day(options: List[FacultyOption], preferred: Optional[str]) -> f
     return 1.0
 
 
-def _score_day_scholar(options: List[FacultyOption]) -> float:
-    """Prefer fewer campus days and an earlier finish for commuting students."""
-    meetings = [meeting for opt in options for meeting in expand_slot(opt.slot)]
+def _score_day_scholar_meetings(meetings: List[Tuple[str, str, str, str]]) -> float:
+    """Softly prefer each teaching day to finish by 18:00, and earlier if possible.
+
+    Finishing by 18:00 scores in the 0.9-1.0 range, with earlier finishes
+    slightly preferred. Finishes after 18:00 score below 0.9 and decline
+    linearly to zero at the latest official period end. The strong score change
+    expresses the preference without turning 18:00 into an eligibility rule.
+    """
     if not meetings:
         return 1.0
-    campus_days = {day for day, _, _, _ in meetings}
-    day_score = max(0.0, 1.0 - (len(campus_days) - 1) / max(len(_DAYS_ORDER) - 1, 1))
-    late_meetings = sum(1 for _, start, _, _ in meetings if start >= "16:25")
-    finish_score = 1.0 - late_meetings / len(meetings)
-    return 0.75 * day_score + 0.25 * finish_score
+
+    periods = _official_periods()
+    if not periods:
+        return 1.0
+    earliest_finish = min(_clock_minutes(end) for _, end in periods)
+    latest_finish = max(_clock_minutes(end) for _, end in periods)
+    preferred_finish = 18 * 60
+    finishes_by_day: Dict[str, int] = {}
+    for day, _, end, _ in meetings:
+        finish = _clock_minutes(end)
+        finishes_by_day[day] = max(finishes_by_day.get(day, 0), finish)
+
+    before_span = max(preferred_finish - earliest_finish, 1)
+    after_span = max(latest_finish - preferred_finish, 1)
+    daily_scores = []
+    for finish in finishes_by_day.values():
+        if finish <= preferred_finish:
+            score = 0.9 + 0.1 * (preferred_finish - finish) / before_span
+        else:
+            score = 0.9 * (latest_finish - finish) / after_span
+        daily_scores.append(max(0.0, min(score, 1.0)))
+    return sum(daily_scores) / len(daily_scores)
+
+
+def _score_day_scholar(options: List[FacultyOption]) -> float:
+    """Score daily finish times for the Day Scholar's soft 18:00 preference."""
+    return _score_day_scholar_meetings(
+        [meeting for opt in options for meeting in expand_slot(opt.slot)]
+    )
 
 
 # ─── composite timetable score ────────────────────────────────────────────────
@@ -242,7 +257,7 @@ def compute_score(
     Faculty information remains visible and under manual student control.
     Objective components:
       Gap Quality: 30%
-      Preference Match: 25% (free day, early morning, Saturday avoidance)
+      Preference Match: 25% (configured preferred free day and Day Scholar finish time)
       Travel Efficiency: 20% (verified building walking distances)
       Lunch Quality: 15%
       Morning/Evening Balance: 10%
@@ -256,15 +271,17 @@ def compute_score(
     # Day Scholar and lunch are independent. Lunch is always a soft preference.
     lunch_score  = _score_lunch(options_only) if mandatory_lunch else 1.0
     morning_score= _score_morning(options_only, prefs.timePreference or "balanced")
-    sat_score    = _score_saturday(options_only)
-    early_score  = _score_early_morning(options_only, prefs.avoidEarlyMorning or False)
     free_score   = _score_free_day(options_only, prefs.preferredFreeDay)
 
-    # Preference match: free day + Saturday + early morning; walking if enabled
-    pref_parts = [free_score, sat_score, early_score]
+    # Only preferences that the user can currently select contribute here.
+    # The retired early-class control and unsupported unconditional Saturday
+    # penalty do not affect the score.
+    pref_parts = []
+    if prefs.preferredFreeDay:
+        pref_parts.append(free_score)
     if prefs.dayScholar:
         pref_parts.append(_score_day_scholar(options_only))
-    preference_match = sum(pref_parts) / len(pref_parts)
+    preference_match = sum(pref_parts) / len(pref_parts) if pref_parts else 1.0
 
     # Composite weighted score (0-100)
     available_weights = [(0.30, gap_score), (0.25, preference_match), (0.15, lunch_score), (0.10, morning_score)]
@@ -484,16 +501,6 @@ def optimize(inp: OptimizeInput) -> OptimizeResult:
                     "facultyName": opt.facultyName,
                     "slot": opt.slot,
                     "reason": "Unverified or malformed slot code cannot be safely verified for timetable clash detection"
-                })
-                continue
-
-            # Day scholars require classes to finish before the 18:00 last period.
-            if prefs.dayScholar and any(start >= "18:00" for _, start, _, _ in expand_slot(opt.slot)):
-                excluded_offerings.append({
-                    "courseCode": s.courseCode,
-                    "facultyName": opt.facultyName,
-                    "slot": opt.slot,
-                    "reason": "Classes starting at 18:00 or later are excluded for day scholars.",
                 })
                 continue
 
@@ -734,8 +741,6 @@ def _schedule_final_valid(timetable: RankedTimetable, inp: OptimizeInput) -> boo
             return False
         meetings = expand_slot(offering.slot)
         if not meetings:
-            return False
-        if prefs.dayScholar and any(start >= "18:00" for _, start, _, _ in meetings):
             return False
         if prefs.timePreference == "evening" and any(start == "08:30" for _, start, _, _ in meetings):
             return False

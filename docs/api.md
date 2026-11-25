@@ -90,13 +90,10 @@ Runs the CP-SAT optimizer and returns top-N ranked timetables.
   "preferences": {
     "timePreference": "morning",
     "maxGap": 2,
-    "maxClassesPerDay": 5,
     "mode": "PLANNING",
-    
-    
     "preferredFreeDay": "Wednesday",
-    "avoidSaturday": true,
-    "avoidEarlyMorning": false,
+    "dayScholar": true,
+    "mandatoryLunch": true,
     "walkingPriority": true
   },
   "topN": 20
@@ -154,7 +151,7 @@ Runs the CP-SAT optimizer and returns top-N ranked timetables.
 
 **Notes:**
 - Runs the Google OR-Tools CP-SAT solver with an 8-second time limit
-- Collects up to 60 feasible solutions, returns top-N re-sorted by multi-factor score
+- Enumerates complete feasible assignments for up to eight seconds and retains up to `topN`
 - Returns immediately if no feasible solution exists (hard constraint violation)
 
 ---
@@ -171,16 +168,19 @@ Saves preferences. Body: same `PreferencesInput` schema as the `preferences` fie
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `timePreference` | `"morning"` \| `"evening"` \| `"balanced"` | `"balanced"` | Preferred time-of-day |
-| `maxGap` | number | `4` | Max idle hours between classes per day |
-| `maxClassesPerDay` | number | `5` | Hard cap on classes per day |
+| `timePreference` | `"morning"` \| `"evening"` \| `"balanced"` | `"balanced"` | Selected ranking policy. Morning prefers pre-lunch classes and earlier daily finishes; Evening excludes 08:30 and prefers after-lunch meetings, then 11:40 over 10:05 fallbacks. Both allow other otherwise-valid times as documented in [OPTIMIZATION_FLOW.md](OPTIMIZATION_FLOW.md). |
+| `maxGap` | number | `2` | Soft compactness preference in official-period gaps. `0` penalizes gaps but does not reject them. |
+| `maxClassesPerDay` | number | `6` | Accepted for compatibility but not currently enforced; semantics differ for combined offerings. |
 | `teacherPriority` | boolean | deprecated | Accepted for compatibility; ignored by optimizer |
 | `prioritizeDifficulty` | boolean | deprecated | Accepted for compatibility; ignored by optimizer |
 | `prioritizeAttendance` | boolean | deprecated | Accepted for compatibility; ignored by optimizer |
-| `preferredFreeDay` | string \| null | `null` | Day with no classes (e.g. `"Wednesday"`) |
-| `avoidSaturday` | boolean | `false` | Penalise Saturday classes |
-| `avoidEarlyMorning` | boolean | `false` | Penalise 08:00 slots |
-| `walkingPriority` | boolean | `false` | Minimise building switching |
+| `preferredFreeDay` | string \| null | `null` | Soft preference for a day without classes (e.g. `"Wednesday"`). It does not reject schedules using that day. |
+| `dayScholar` | boolean | `false` | Softly prefer daily finishes by 18:00 and earlier finishes; later classes remain eligible. Independent of lunch. |
+| `mandatoryLunch` | boolean | `false` | Despite the legacy field name, this enables a soft lunch-period score preference; it never rejects a schedule. |
+| `walkingPriority` | boolean | `true` | Include the soft travel score when verified building transitions are available. Unknown transitions remain unknown. |
+| `avoidSaturday`, `avoidEarlyMorning` | boolean | n/a | Accepted for backward compatibility and ignored by the current optimizer. |
+
+All actual hard constraints, selected-mode policy tiers, and soft-score weights are described in [OPTIMIZATION_FLOW.md](OPTIMIZATION_FLOW.md). Preferences affect ranking only unless specifically identified as a hard scheduling rule; soft preferences cannot make an otherwise-valid schedule infeasible.
 
 ---
 
