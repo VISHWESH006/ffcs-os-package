@@ -26,7 +26,43 @@
 .page-heading h1{font-size:30px}.subheading{font-size:14px;line-height:1.55}.eyebrow{font-size:11px}.panel-head h2,.preview-heading h2{font-size:18px}.panel-head .eyebrow{font-size:10px}.btn{font-size:13px;padding:10px 15px}.preferences-grid label,.save-row label{font-size:12px}.preferences-grid select,.save-row input{height:42px;font-size:13px;padding-inline:11px}.preferences-grid .check-setting{font-size:12px}.preference-help{font-size:12px;line-height:1.5}.builder-actions>span{font-size:12px}.section-title h2{font-size:19px}.section-title .muted-small,.muted-small{font-size:12px}.timetable-option-main{gap:7px;padding:14px}.option-title{font-size:14px}.option-time-range{font-size:16px}.option-details{font-size:12px}.option-compare{font-size:12px;padding:8px 10px}.compare-status{font-size:12px}.compare-status button{font-size:11px}.compare-panel h2{font-size:17px}.compare-labels b,.compare-option>b,.compare-option>span{font-size:11px;line-height:1.4}.schedule-summary>span{font-size:11px}.screenshot-timetable th,.screenshot-timetable td{font-size:clamp(8px,.85vw,11px);padding:4px 3px}.screenshot-timetable thead th{font-size:11px}.screenshot-timetable .empty-slot-code{font-size:10px}.screenshot-timetable .timetable-cell{min-height:54px;padding:5px 3px;gap:5px}.screenshot-timetable .timetable-cell b{font-size:10px}.screenshot-timetable .timetable-cell small{font-size:9px;line-height:1.25}.timetable-faculty{font-size:10px;line-height:1.25}.change-teacher-button{font-size:9px;padding:4px;gap:3px}.change-teacher-button span{font-size:8px;min-width:16px;height:16px}.screenshot-timetable .lunch-cell,.screenshot-timetable .day-name{font-size:10px}.screenshot-timetable .empty-period{min-height:54px}.course-code{font-size:13px}.course-toggle>b{font-size:15px}.course-subtitle,.course-meta,.offering-count{font-size:11px}.course-meta .tag{font-size:10px}.offerings-head b{font-size:13px}.offerings-head small{font-size:11px}.offering-slots>b{font-size:13px}.slot-verification{font-size:10px}.offering-details{font-size:11px;gap:9px 13px}.missing-note{font-size:10px}.offering-card>.btn{font-size:12px}.offering-picker-heading h2{font-size:21px}.offering-picker-heading p:not(.eyebrow){font-size:13px}.offering-picker-copy b{font-size:14px}.offering-picker-copy small{font-size:12px}.offering-picker-seat{font-size:11px}.offering-picker-status{font-size:12px}
 @media(max-width:760px){.page-heading h1{font-size:26px}.subheading{font-size:13px}.panel-head h2,.preview-heading h2{font-size:17px}.preferences-grid label,.save-row label{font-size:12px}.preferences-grid select,.save-row input{font-size:13px}.timetable-option-main{padding:12px}.option-title{font-size:14px}.option-time-range{font-size:15px}.option-details{font-size:12px}.screenshot-timetable th,.screenshot-timetable td{font-size:7.5px;padding:3px 1px}.screenshot-timetable thead th{font-size:8px}.screenshot-timetable .timetable-cell{min-height:48px;padding:3px 1px}.screenshot-timetable .timetable-cell b,.timetable-faculty{font-size:7.5px}.screenshot-timetable .timetable-cell small{font-size:7px}.change-teacher-button{font-size:7px;padding:2px 1px}.screenshot-timetable .empty-slot-code,.screenshot-timetable .lunch-cell,.screenshot-timetable .day-name{font-size:7.5px}.offering-details{font-size:11px}.offering-picker-copy b{font-size:13px}.offering-picker-copy small{font-size:11px}}
 /* Authentication gate and compact account actions */
-.auth-screen{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--app-bg,#f4f7fb)}.auth-card{width:min(100%,440px);display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:32px;border:1px solid var(--border,#e2e8f0);border-radius:16px;background:#fff;box-shadow:0 18px 50px rgba(20,40,70,.08)}.auth-card h1{margin:0;font-size:25px;line-height:1.2;color:#172b43}.auth-card p{margin:0;color:#52647a;line-height:1.55}.auth-brand{display:flex;align-items:center;gap:9px;color:#1477d4;font-size:16px;font-weight:800}.auth-google-button{width:100%;justify-content:center;gap:9px}.auth-card small{color:#697b8e;line-height:1.5}.auth-error{width:100%;padding:10px 12px;border-radius:8px;background:#fff1f0;color:#a12925!important}.account-email{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#52647a;font-size:12px}.auth-action{width:34px;height:34px;color:#52647a}.auth-delete:hover{color:#b42318;border-color:#f2b8b5}
+.auth-screen{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--app-bg,#f4f7fb)}.auth-card{width:min(100%,440px);display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:32px;border:1px solid var(--border,#e2e8f0);border-radius:16px;background:#fff;box-shadow:0 18px 50px rgba(20,40,70,.08)}.auth-card h1{margin:0;font-size:25px;line-height:1.2;color:#172b43}.auth-card p{margin:0;color:#52647a;line-height:1.55}.auth-brand{display:flex;align-items:center;gap:9px;color:#1477d4;font-size:16px;font-weight:800}.auth-google-button{width:100%;justify-content:center;gap:9px}.auth-card small{color:#697b8e;line-height:1.5}.auth-error{width:100%;padding:10px 12px;border-radius:8px;background:#fff1f0;color:#a12925!important}.account-email{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#52647a;font-size:12px}.auth-action{width:34px;height:34px;color:#52647a}
+
+/* Readability pass: raise supporting copy while retaining the existing heading hierarchy. */
+.sidebar .nav-link{font-size:14px}
+.sidebar .nav-label,.sidebar .term-chip{font-size:11px}
+.sidebar .local-note b,.sidebar .profile b{font-size:12px}
+.sidebar .local-note small,.sidebar .profile small{font-size:11px}
+.breadcrumbs,.api-status{font-size:12px}
+.stat-label{font-size:12px}
+.stat-card small{font-size:11px;line-height:1.4}
+.journey-step{min-height:66px}
+.step-copy b{font-size:15px}
+.step-copy small{font-size:12px;line-height:1.45}
+.status-rows div,.import-ready small{font-size:12px;line-height:1.45}
+.empty-small p{font-size:13px}
+.text-btn{font-size:12px}
+.dropzone b{font-size:14px}
+.dropzone small{font-size:12px;line-height:1.45}
+.divider-label,.import-actions>small,.current-data small,.current-data b{font-size:12px;line-height:1.5}
+.check-list{font-size:13px;line-height:1.5}
+.privacy-note p{font-size:12px;line-height:1.45}
+.privacy-note small{font-size:11px;line-height:1.45}
+.json-input{font-size:13px;line-height:1.55}
+.course-subtitle,.course-meta,.offering-count,.offerings-head small{line-height:1.45}
+.empty-panel>b{font-size:15px}
+.empty-panel p{font-size:12px;line-height:1.55}
+.saved-title b{font-size:14px}
+.saved-title small,.saved-courses span{font-size:11px;line-height:1.4}
+.pdf-help{font-size:11px}
+.page-heading .subheading{max-width:760px}
+@media(max-width:760px){
+  .sidebar .nav-link{font-size:14px}
+  .step-copy b{font-size:14px}
+  .step-copy small,.status-rows div,.dropzone small,.empty-panel p{font-size:12px}
+  .check-list{font-size:12px}
+  .saved-title b{font-size:13px}
+}
 
 /* Pearl glass authentication screen, based on the supplied visual reference. */
 .auth-screen{

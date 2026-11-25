@@ -129,6 +129,53 @@
     }
     .modal-title { font-size: 14px; font-weight: 700; color: #fff; }
     .modal-text { font-size: 12px; color: #a1a1aa; line-height: 1.4; }
+
+    /* Shared FFCS OS pearl-glass theme. This changes presentation only. */
+    :root { color-scheme: light; --ink:#242832; --muted:#68707d; --line:rgba(203,213,228,.82); --glass:rgba(255,255,255,.86); --blue:#1683f8; --green:#247651; }
+    body { background:radial-gradient(ellipse at 100% 0%,rgba(218,201,255,.52),transparent 42%),radial-gradient(ellipse at 0% 0%,rgba(205,226,255,.68),transparent 44%),#eef1f7; color:var(--ink); font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; font-size:13px; }
+    .header { position:sticky;top:0;z-index:5;padding:15px 17px;background:rgba(255,255,255,.78);color:var(--ink);border-bottom:1px solid rgba(255,255,255,.9);box-shadow:0 5px 18px rgba(46,56,78,.07);backdrop-filter:blur(18px); }
+    .header-logo { display:grid;place-items:center;width:34px;height:34px;border:1px solid #e1e7f0;border-radius:50%;background:#fff;color:var(--blue);font-size:19px;box-shadow:0 3px 10px rgba(32,47,72,.12); }
+    .header-title { color:#252832;font-size:15px;letter-spacing:-.35px; }
+    .header-sub { color:#747b87;font-size:11px;opacity:1;margin-top:2px; }
+    .header-badge { padding:4px 9px;border:1px solid #dfe5ee;border-radius:999px;background:rgba(255,255,255,.84);color:#536071;font-size:10px; }
+    .container { padding:14px 15px 16px;gap:12px; }
+    .stats-card,.section-content { border:1px solid var(--line);border-radius:17px;background:var(--glass);box-shadow:0 8px 22px rgba(37,49,72,.07),inset 0 1px 0 #fff; }
+    .stats-card { padding:11px 7px; }
+    .stat-val { color:#188b77;font-size:21px; }
+    .stat-lbl { color:#747b87;font-size:9px;letter-spacing:.45px; }
+    .btn { min-height:39px;border-radius:999px;font-size:12px;font-weight:650;transition:transform .15s,box-shadow .15s,background .15s; }
+    .btn:hover:not(:disabled) { transform:translateY(-1px); }
+    .btn-primary { background:#22252c;color:#fff;box-shadow:0 5px 12px rgba(28,34,46,.17); }
+    .btn-primary:hover:not(:disabled) { background:#353a45; }
+    .btn-success { background:#287b5a;color:#fff;box-shadow:0 4px 10px rgba(40,123,90,.14); }
+    .btn-success:hover:not(:disabled) { background:#216849; }
+    .btn-outline { border:1px solid var(--line);background:rgba(255,255,255,.78);color:#424955;box-shadow:inset 0 1px 0 #fff; }
+    .btn-outline:hover:not(:disabled) { border-color:#b9c8dd;background:#fff; }
+    .btn-danger { border-color:#edc9c9;background:rgba(255,250,250,.82);color:#b44b4b;font-size:11px; }
+    .btn-danger:hover:not(:disabled) { background:#fff0f0; }
+    .alert { padding:11px 13px;border-radius:14px;font-size:12px;line-height:1.5;box-shadow:inset 0 1px 0 rgba(255,255,255,.6); }
+    .alert-info { background:#f1f6fd;border-color:#d7e5f7;color:#536b88; }
+    .alert-success { background:#eff8f2;border-color:#cfe7d6;color:#356d4d; }
+    .alert-warning { background:#fff7e9;border-color:#f1dfbd;color:#8a6423; }
+    .alert-error { background:#fff1f0;border-color:#f0cfcc;color:#a64942; }
+    .section-title { color:#626b79;font-size:11px;letter-spacing:.65px;padding:4px 2px; }
+    .section-title:hover { color:#253246; }
+    .section-content { max-height:150px;padding:8px;gap:5px; }
+    .history-item { padding:7px 8px;border:1px solid rgba(222,228,238,.75);border-radius:10px;background:rgba(246,248,252,.9);font-size:11px; }
+    .history-title { color:#303744; }
+    .history-metrics { color:#707989;font-size:10px; }
+    .course-item { padding:7px 6px;border-color:#e7ebf2;font-size:11px; }
+    .course-code { color:#197f70; }
+    .course-name { color:#646d7b; }
+    .course-opts { background:#eaf2fd;color:#356aa1;font-size:10px; }
+    .footer { border-color:rgba(203,213,228,.76);color:#77808d;font-size:10px; }
+    .modal-overlay { background:rgba(38,47,64,.36);backdrop-filter:blur(5px); }
+    .modal { border:1px solid rgba(255,255,255,.92);border-radius:20px;background:rgba(255,255,255,.96);box-shadow:0 22px 60px rgba(31,42,62,.2); }
+    .modal-title { color:#272c35; }
+    .modal-text { color:#626c7a; }
+    button:focus-visible { outline:3px solid rgba(22,131,248,.35);outline-offset:2px; }
+    ::-webkit-scrollbar { width:8px; }
+    ::-webkit-scrollbar-thumb { border:2px solid transparent;border-radius:99px;background:rgba(117,132,157,.36);background-clip:padding-box; }
   </style>
 </head>
 <body>

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { User } from 'firebase/auth';
-import { firebaseConfigured, observeAuth, reauthenticateWithGoogle, signInWithGoogle, signOutGoogle } from './firebase';
+import { firebaseConfigured, observeAuth, signInWithGoogle, signOutGoogle } from './firebase';
 
 interface AuthContextValue {
   user: User | null;
@@ -9,14 +9,12 @@ interface AuthContextValue {
   error: string | null;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
-  reauthenticate: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue>({
   user: null, loading: false, configured: false, error: null,
   signIn: async () => undefined,
   signOut: async () => undefined,
-  reauthenticate: async () => { throw new Error('Authentication is unavailable.'); },
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -47,7 +45,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try { await signOutGoogle(); }
       catch (reason) { const message = reason instanceof Error ? reason.message : 'Sign-out failed.'; setError(message); throw reason; }
     },
-    async reauthenticate() { await reauthenticateWithGoogle(); },
   }), [user, loading, error]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

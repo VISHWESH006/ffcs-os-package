@@ -84,7 +84,9 @@ export async function requireFirebaseAuth(req: Request, res: Response, next: Nex
       res.status(401).json({ error: "The sign-in token is invalid or expired" });
       return;
     }
-    logger.error({ error }, "Firebase token verification is unavailable");
+    // Pino's Error serializer is registered for the conventional `err` key.
+    // Keep the bearer token and request headers out of this diagnostic record.
+    logger.error({ err: error }, "Firebase token verification is unavailable");
     res.status(503).json({ error: "Authentication service is not configured or unavailable" });
   }
 }

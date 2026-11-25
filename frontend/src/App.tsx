@@ -6,10 +6,10 @@ import {
   LoaderCircle, LogOut, MapPin, Menu, Printer, Search, Settings2, Sparkles, Trash2,
   Upload, Users, X,
 } from 'lucide-react';
-import { checkApiHealth, deleteAccount as deleteAccountApi, deleteSaved, listSaved, optimize, parseImport, saveTimetable } from './api/client';
+import { checkApiHealth, deleteSaved, listSaved, optimize, parseImport, saveTimetable } from './api/client';
 import slots from './data/slots.json';
 import type { Course, OfficialSlot, Offering, OptimizeResult, PageId, Preferences, RankedTimetable, SavedTimetableSummary } from './types';
-import { clearStoredState, EMPTY_STATE, readStoredState, writeStoredState, type PlannerState } from './utils/storage';
+import { EMPTY_STATE, readStoredState, writeStoredState, type PlannerState } from './utils/storage';
 import { hasCurrentValidation } from './utils/validated-export';
 import { useAuth } from './auth/AuthContext';
 import { trackPageView } from './analytics';
@@ -42,7 +42,7 @@ function usePlanner(uid: string) {
 }
 
 function App() {
-  const { user, signOut, reauthenticate } = useAuth();
+  const { user, signOut } = useAuth();
   const uid = user?.uid ?? 'anonymous';
   const [state, setState, storageIssue] = usePlanner(uid);
   const [page, setPage] = useState<PageId>('dashboard');
@@ -357,18 +357,6 @@ function App() {
     catch (error) { setNotice({ type: 'error', text: error instanceof Error ? error.message : 'Could not delete saved timetable.' }); }
   }
 
-  async function deleteAccount() {
-    if (!user || !window.confirm('Permanently delete your Google sign-in and all saved FFCS OS data for this account? This cannot be undone.')) return;
-    try {
-      await reauthenticate();
-      await deleteAccountApi();
-      clearStoredState(uid);
-      await signOut();
-    } catch (error) {
-      setNotice({ type: 'error', text: error instanceof Error ? error.message : 'Account deletion could not be completed.' });
-    }
-  }
-
   const activeTitle = NAV.find(item => item.id === page)?.title ?? 'Overview';
   const offeringCount = state.courses.reduce((sum, course) => sum + course.options.length, 0);
 
@@ -383,7 +371,7 @@ function App() {
       </aside>
       {mobileNav && <button className="scrim" onClick={() => setMobileNav(false)} aria-label="Close navigation" />}
       <main className="main-area">
-        <header className="topbar"><button className="icon-btn mobile-menu" onClick={() => setMobileNav(true)} aria-label="Open navigation"><Menu size={20} /></button><div className="breadcrumbs"><span>FFCS OS</span><b>{activeTitle}</b></div><div className="top-actions"><span className={`api-status ${apiReady === false ? 'api-disconnected' : ''}`}><span className="status-dot" />{apiReady === null ? 'Checking API' : apiReady ? 'API connected' : 'API unavailable'}</span><span className="account-email">{user?.email}</span><button className="icon-btn auth-action" onClick={() => void signOut()} aria-label="Sign out" title="Sign out"><LogOut size={17} /></button><button className="icon-btn auth-action auth-delete" onClick={() => void deleteAccount()} aria-label="Delete account" title="Delete account"><Trash2 size={17} /></button></div></header>
+        <header className="topbar"><button className="icon-btn mobile-menu" onClick={() => setMobileNav(true)} aria-label="Open navigation"><Menu size={20} /></button><div className="breadcrumbs"><span>FFCS OS</span><b>{activeTitle}</b></div><div className="top-actions"><span className={`api-status ${apiReady === false ? 'api-disconnected' : ''}`}><span className="status-dot" />{apiReady === null ? 'Checking API' : apiReady ? 'API connected' : 'API unavailable'}</span><span className="account-email">{user?.email}</span><button className="icon-btn auth-action" onClick={() => void signOut()} aria-label="Sign out" title="Sign out"><LogOut size={17} /></button></div></header>
         <div className="page-wrap">
           {storageIssue && <div role="alert" className="notice notice-error"><span>{storageIssue}</span></div>}
           {notice && <div role="status" className={`notice notice-${notice.type}`}><span>{notice.text}</span><button onClick={() => setNotice(null)} aria-label="Dismiss notice"><X size={16} /></button></div>}
@@ -491,8 +479,8 @@ function BuilderPage({ state, validationAttempt, selectedCourses, alternatives, 
           <div className="preferences-grid">
             <label>Planning mode<select value={state.preferences.mode} onChange={event => onPreference('mode', event.target.value as Preferences['mode'])}><option value="PLANNING">Explore options, including full or unknown seats</option><option value="LIVE_REGISTRATION">Only use offerings with confirmed seats</option></select></label>
             <PreferenceChoice label="Class-time preference" value={state.preferences.timePreference} options={[{ value: 'balanced', label: 'No preference' }, { value: 'morning', label: 'Prefer earlier classes' }, { value: 'evening', label: 'Prefer later classes' }]} onChange={value => onPreference('timePreference', value)} />
-            <label>Student routine<select value={state.preferences.dayScholar ? 'day-scholar' : 'flexible'} onChange={event => onPreference('dayScholar', event.target.value === 'day-scholar')}><option value="flexible">Campus resident / flexible commute</option><option value="day-scholar">Day scholar · prefer to finish by 6 PM</option></select><small className="preference-help">This is a soft preference. Later classes remain eligible and are scored lower; earlier daily finishes are preferred.</small></label>
-            <label>Preferred day off<select value={state.preferences.preferredFreeDay ?? ''} onChange={event => onPreference('preferredFreeDay', event.target.value || null)}><option value="">No preference</option>{['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(day => <option key={day} value={day}>{({ MON: 'Monday', TUE: 'Tuesday', WED: 'Wednesday', THU: 'Thursday', FRI: 'Friday', SAT: 'Saturday' } as Record<string, string>)[day]}</option>)}</select></label>
+            <label>Student routine<select value={state.preferences.dayScholar ? 'day-scholar' : 'flexible'} onChange={event => onPreference('dayScholar', event.target.value === 'day-scholar')}><option value="flexible">Hostler</option><option value="day-scholar">Day schooler</option></select><small className="preference-help">Day schooler schedules prefer to finish by 6 PM, but later classes remain possible.</small></label>
+            <label>Preferred day off<select value={state.preferences.preferredFreeDay ?? ''} onChange={event => onPreference('preferredFreeDay', event.target.value || null)}><option value="">No preference</option>{['MON', 'TUE', 'WED', 'THU', 'FRI'].map(day => <option key={day} value={day}>{({ MON: 'Monday', TUE: 'Tuesday', WED: 'Wednesday', THU: 'Thursday', FRI: 'Friday' } as Record<string, string>)[day]}</option>)}</select></label>
             <label>Maximum gap between classes<select value={state.preferences.maxGap} onChange={event => onPreference('maxGap', Number(event.target.value))}><option value={0}>0 free periods</option><option value={1}>1 free period</option><option value={2}>2 free periods</option><option value={3}>3 free periods</option><option value={4}>4 free periods</option></select></label>
             <div className="preference-lunch-setting"><button type="button" className={`lunch-toggle ${state.preferences.mandatoryLunch ? 'enabled' : ''}`} aria-pressed={state.preferences.mandatoryLunch} onClick={() => onPreference('mandatoryLunch', !state.preferences.mandatoryLunch)}><span className="lunch-switch" aria-hidden="true"><span /></span><span className="lunch-toggle-copy"><b>Keep the lunch period free</b><small>Optional soft preference</small></span><span className="lunch-toggle-state">{state.preferences.mandatoryLunch ? 'On' : 'Off'}</span></button>{state.preferences.mandatoryLunch && <small className="preference-help">Favors keeping 1:15–2:45 PM free, especially after an 11:40 AM class. It never blocks a valid schedule.</small>}</div>
           </div>

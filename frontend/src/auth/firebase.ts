@@ -4,7 +4,6 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
-  reauthenticateWithPopup,
   setPersistence,
   signInWithPopup,
   signOut,
@@ -28,15 +27,6 @@ export async function signInWithGoogle(): Promise<User> {
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({ prompt: 'select_account' });
   return (await signInWithPopup(firebaseAuth, provider)).user;
-}
-
-export async function reauthenticateWithGoogle(): Promise<void> {
-  if (!firebaseAuth?.currentUser) throw new Error('Sign in before continuing.');
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: 'select_account' });
-  await reauthenticateWithPopup(firebaseAuth.currentUser, provider);
-  // Account deletion is protected by the server's recent-authentication check.
-  await firebaseAuth.currentUser.getIdToken(true);
 }
 
 export async function signOutGoogle(): Promise<void> {

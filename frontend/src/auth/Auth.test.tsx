@@ -12,7 +12,6 @@ const fakes = vi.hoisted(() => {
     observeAuth: vi.fn((callback: (user: unknown) => void) => { listener = callback; callback(user); return () => { listener = undefined; }; }),
     signInWithGoogle: vi.fn(async () => { listener?.(user); return user; }),
     signOutGoogle: vi.fn(async () => { listener?.(null); }),
-    reauthenticateWithGoogle: vi.fn(async () => undefined),
   };
 });
 
