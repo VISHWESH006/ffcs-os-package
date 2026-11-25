@@ -34,7 +34,7 @@ test('Pino serializes Firebase error name, message, code, and stack through err'
 
 test('Firebase middleware sends caught exceptions through Pino err serializer', () => {
   const source = readFileSync(join(root, 'api-server', 'src', 'lib', 'firebase-auth.ts'), 'utf8');
-  assert.match(source, /logger\.error\(\{\s*err:\s*error\s*\},\s*"Firebase token verification is unavailable"\)/);
+  assert.match(source, /logger\.error\(\s*\{\s*err:\s*error\s*\}\s*,\s*"Firebase token verification is unavailable"\s*\)/);
 });
 
 test('authentication service failure logs diagnostics but keeps tokens and credentials private and returns generic 503', async t => {
