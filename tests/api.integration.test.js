@@ -203,6 +203,15 @@ test('actual Node API → Python CLI → DataStore → parser and optimizer', as
     assert.equal(validSelection.selectionValid, true);
     assert.equal(validSelection.timetables[0].courses.find(course => course.courseCode === 'CSE1001').offeringId, validIds.CSE1001);
 
+    const partialLockResponse = await fetch(`${base}/optimize`, { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ subjects: parsed.subjects, preferences: { mode: 'PLANNING', selectedOfferings: { CSE1001: validIds.CSE1001 } }, topN: 20 }) });
+    assert.equal(partialLockResponse.status, 200, logs);
+    const partialLockResult = await partialLockResponse.json();
+    assert.equal(partialLockResult.selectionValid, true);
+    assert.ok(partialLockResult.timetables.length > 0);
+    assert.ok(partialLockResult.timetables.every(tt => tt.courses.find(course => course.courseCode === 'CSE1001')?.offeringId === validIds.CSE1001),
+      'every returned alternative must retain the explicitly locked CSE1001 offering');
+
     const chosenTimetable = validSelection.timetables[0];
     const saveRequest = (overrides = {}) => fetch(`${base}/timetables`, { method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ name: 'Validated integration schedule', rawData, preferences: { mode: 'PLANNING' }, courseCodes: ['CSE1001', 'MAT1001'], selectedOfferings: validIds,

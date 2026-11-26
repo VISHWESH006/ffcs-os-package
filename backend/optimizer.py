@@ -447,11 +447,9 @@ def optimize(inp: OptimizeInput) -> OptimizeResult:
         for code in selection_map:
             if code.upper() not in by_code:
                 selection_errors.append({"courseCode": code, "reason": "UNKNOWN_COURSE"})
-        for subj in inp.subjects:
-            code = subj.courseCode.upper()
-            selected_id = normalized_selection.get(code)
-            if selected_id is None:
-                selection_errors.append({"courseCode": subj.courseCode, "reason": "SELECTION_REQUIRED"})
+        for code, selected_id in normalized_selection.items():
+            subj = by_code.get(code)
+            if subj is None:
                 continue
             matches = [o for o in subj.options if o.offeringId == selected_id]
             if len(matches) != 1:
@@ -467,7 +465,7 @@ def optimize(inp: OptimizeInput) -> OptimizeResult:
                 timetables=[], durationMs=int(time.time() * 1000) - start_ms,
                 feasibleCount=0, mode=mode, selectionValid=False,
                 selectionErrors=selection_errors,
-                infeasibleExplanation="Selected offerings could not be validated. Refresh the course data and select an available offering for every course.",
+                infeasibleExplanation="One or more locked offerings could not be validated. Refresh the course data and review those selections.",
             )
 
     # ── Stage 1: Validate slots and filter by mode ────────────────────────────
@@ -478,7 +476,8 @@ def optimize(inp: OptimizeInput) -> OptimizeResult:
     selection_by_code = {s.courseCode.upper(): opt for s, opt in selected_options}
     for s in inp.subjects:
         valid_options: List[FacultyOption] = []
-        candidate_options = [selection_by_code[s.courseCode.upper()]] if selection_map is not None else s.options
+        locked_option = selection_by_code.get(s.courseCode.upper())
+        candidate_options = [locked_option] if locked_option is not None else s.options
         for opt in candidate_options:
             if not opt.facultyName or not opt.facultyName.strip():
                 excluded_offerings.append({
@@ -565,7 +564,10 @@ def optimize(inp: OptimizeInput) -> OptimizeResult:
             infeasibleCourses=infeasible_courses,
             excludedOfferings=excluded_offerings,
             selectionValid=(False if selection_map is not None else None),
-            selectionErrors=([{"courseCode": code, "reason": "OFFERING_NOT_ELIGIBLE"} for code in infeasible_courses] if selection_map is not None else []),
+            selectionErrors=([
+                {"courseCode": code, "reason": "OFFERING_NOT_ELIGIBLE"}
+                for code in infeasible_courses if code.upper() in selection_by_code
+            ] if selection_map is not None else []),
         )
 
     if not filtered_subjects:
@@ -720,6 +722,9 @@ def _schedule_final_valid(timetable: RankedTimetable, inp: OptimizeInput) -> boo
         return False
 
     slots: List[str] = []
+    locked_selections = {str(code).upper(): offering_id for code, offering_id in (prefs.selectedOfferings or {}).items()}
+    if any(code not in expected_codes for code in locked_selections):
+        return False
     for course in timetable.courses:
         slots.append(course.slot)
         subject = next((item for item in inp.subjects if item.courseCode.upper() == course.courseCode.upper()), None)
@@ -734,6 +739,22 @@ def _schedule_final_valid(timetable: RankedTimetable, inp: OptimizeInput) -> boo
         if len(matching_offerings) != 1:
             return False
         offering = matching_offerings[0]
+        locked_id = locked_selections.get(course.courseCode.upper())
+        if locked_id is not None:
+            # Validate both identity and the serialized offering fields. This
+            # prevents a stale or tampered result from retaining an ID while
+            # substituting another faculty, slot combination, or venue.
+            if course.offeringId != locked_id:
+                return False
+            if (
+                course.facultyName != offering.facultyName
+                or course.slot != offering.slot
+                or course.slots != offering.slots
+                or course.venue != offering.venue
+                or course.componentType != offering.componentType
+                or course.building != offering.building
+            ):
+                return False
         if offering is None or offering.slotVerificationStatus in ("CONTAINS_UNVERIFIED", "MISSING_OR_INVALID"):
             return False
         atomic = offering.slots or [part.strip() for part in re.split(r"[+,/\s]+", offering.slot) if part.strip()]

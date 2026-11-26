@@ -252,18 +252,46 @@ function App() {
 
   async function generateAlternatives() {
     const revision = ++requestRevision.current;
-    const sourceSnapshot = JSON.stringify([state.courses, state.selectedCourses, state.preferences, state.importRawData]);
+    const sourceSnapshot = JSON.stringify([state.courses, state.selectedCourses, state.preferences, state.offeringSelections, state.importRawData]);
     setValidationAttempt(null);
     if (!selectedCourses.length) { setNotice({ type: 'info', text: 'Select at least one required course first.' }); return; }
     setBusy(true); setNotice(null);
     try {
-      const result = await optimize(selectedCourses, state.preferences, 20);
-      if (revision !== requestRevision.current || sourceSnapshot !== JSON.stringify([currentState.current.courses, currentState.current.selectedCourses, currentState.current.preferences, currentState.current.importRawData])) return;
+      const lockedSelections = Object.fromEntries(Object.entries(state.offeringSelections)
+        .filter(([code, offeringId]) => selectedCourses.some(course => course.courseCode === code) && Boolean(offeringId)));
+      const preferences = Object.keys(lockedSelections).length
+        ? { ...state.preferences, selectedOfferings: lockedSelections }
+        : state.preferences;
+      const result = await optimize(selectedCourses, preferences, 20);
+      if (revision !== requestRevision.current || sourceSnapshot !== JSON.stringify([currentState.current.courses, currentState.current.selectedCourses, currentState.current.preferences, currentState.current.offeringSelections, currentState.current.importRawData])) return;
       setAlternatives(result.timetables ?? []);
       setPreviewRank(result.timetables?.[0]?.rank ?? null);
       setCompareRanks([]);
       setState(prev => ({ ...prev, latestAlternatives: result.timetables ?? [], validation: result, validatedTimetable: null }));
-      if (!result.timetables?.length) setNotice({ type: 'error', text: result.infeasibleExplanation ?? `No valid schedule was found. ${result.excludedOfferings?.length ?? 0} offerings were excluded by validation.` });
+      if (!result.timetables?.length) {
+        const lockedFailures = (result.selectionErrors ?? []).filter(error =>
+          Boolean(error.courseCode && lockedSelections[error.courseCode]),
+        );
+        if (lockedFailures.length) {
+          const messages = lockedFailures.map(error => {
+            const code = error.courseCode!;
+            const selectedId = lockedSelections[code];
+            const offering = state.courses.find(course => course.courseCode === code)?.options
+              .find(option => option.offeringId === selectedId);
+            const exclusions = (result.excludedOfferings ?? [])
+              .filter(item => item.courseCode === code)
+              .map(item => item.reason);
+            const detail = exclusions.length ? [...new Set(exclusions)].join('; ') : error.reason;
+            const offeringLabel = offering
+              ? ` (${[offering.facultyName, offering.slot].filter(Boolean).join(' · ')})`
+              : '';
+            return `The selected offering for ${code}${offeringLabel} cannot be used: ${detail}. Change planning mode or select another offering.`;
+          });
+          setNotice({ type: 'error', text: messages.join(' ') });
+        } else {
+          setNotice({ type: 'error', text: result.infeasibleExplanation ?? `No valid schedule was found. ${result.excludedOfferings?.length ?? 0} offerings were excluded by validation.` });
+        }
+      }
       else setNotice({ type: 'success', text: `${result.feasibleCount} valid timetable option${result.feasibleCount === 1 ? '' : 's'} generated. Choose an option to confirm its exact offerings.${result.lunchPreferenceNote ? ` ${result.lunchPreferenceNote}` : ''}` });
     } catch (error) { if (revision === requestRevision.current) setNotice({ type: 'error', text: error instanceof Error ? error.message : 'Optimization failed.' }); }
     finally { if (revision === requestRevision.current) setBusy(false); }

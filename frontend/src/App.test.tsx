@@ -101,6 +101,40 @@ describe('student timetable workflow', () => {
     expect(document.querySelector('.conflict-panel')?.textContent).toContain('CSE1001 conflicts with MAT1001 · A11 · SLOT_CLASH');
   });
 
+  it('passes a course-workspace offering pick as a lock when generating schedule alternatives', async () => {
+    render(<App />);
+    await importFixture();
+    fireEvent.click(within(courseCard('CSE1001')).getByRole('button', { name: 'Expand offerings' }));
+    fireEvent.click(within(courseCard('CSE1001')).getAllByRole('button', { name: 'Choose offering' })[1]);
+    fireEvent.click(screen.getByRole('button', { name: /timetable builder/i }));
+    fireEvent.click(screen.getByRole('button', { name: 'Show schedule options' }));
+    await waitFor(() => expect(api.optimize).toHaveBeenCalled());
+    expect(api.optimize).toHaveBeenLastCalledWith(expect.any(Array),
+      expect.objectContaining({ selectedOfferings: { CSE1001: 'cse-b' } }), 20);
+  });
+
+  it('shows backend reasons and recovery steps when a locked offering is ineligible', async () => {
+    api.optimize.mockResolvedValueOnce({
+      ...result({ CSE1001: 'cse-b' }),
+      timetables: [],
+      selectionValid: false,
+      selectionErrors: [{ courseCode: 'CSE1001', offeringId: 'cse-b', reason: 'OFFERING_NOT_ELIGIBLE' }],
+      excludedOfferings: [{ courseCode: 'CSE1001', facultyName: 'Faculty B', slot: 'B11', reason: 'Unknown seat count cannot be confirmed available (LIVE_REGISTRATION mode)' }],
+      selectionConflicts: [],
+      infeasibleExplanation: 'Generic infeasibility explanation',
+    });
+    render(<App />);
+    await importFixture();
+    fireEvent.click(within(courseCard('CSE1001')).getByRole('button', { name: 'Expand offerings' }));
+    fireEvent.click(within(courseCard('CSE1001')).getAllByRole('button', { name: 'Choose offering' })[1]);
+    fireEvent.click(screen.getByRole('button', { name: /timetable builder/i }));
+    fireEvent.click(screen.getByRole('button', { name: 'Show schedule options' }));
+    expect(await screen.findByText(/The selected offering for CSE1001 \(Faculty B · B11\) cannot be used:/)).toBeInTheDocument();
+    expect(screen.getByText(/Unknown seat count cannot be confirmed available \(LIVE_REGISTRATION mode\)/)).toBeInTheDocument();
+    expect(screen.getByText(/Change planning mode or select another offering\./)).toBeInTheDocument();
+    expect(screen.queryByText('Generic infeasibility explanation')).not.toBeInTheDocument();
+  });
+
   it('ignores an older validation response after a rapid required-course change', async () => {
     render(<App />);
     await importFixture();

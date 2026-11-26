@@ -105,7 +105,7 @@ def test_student_selected_offering_is_preserved_and_returned():
     assert result.timetables[0].courses[0].seatState == "FULL"  # PLANNING keeps full classes visible.
 
 
-def test_student_selection_rejects_stale_ids_and_missing_course_choices():
+def test_student_selection_rejects_stale_ids_but_allows_unlocked_courses():
     subject = _subject("CSE1001", _option("A11", 10, "AVAILABLE"))
     unknown = optimize(OptimizeInput(subjects=[subject],
         preferences=PreferencesInput(selectedOfferings={"CSE1001": "stale"})))
@@ -113,7 +113,98 @@ def test_student_selection_rejects_stale_ids_and_missing_course_choices():
     assert unknown.selectionErrors[0]["reason"] == "UNKNOWN_OFFERING"
     missing = optimize(OptimizeInput(subjects=[subject],
         preferences=PreferencesInput(selectedOfferings={})))
-    assert missing.selectionErrors[0]["reason"] == "SELECTION_REQUIRED"
+    assert missing.selectionValid is True
+    assert missing.timetables
+
+
+def test_partial_offering_lock_keeps_exact_identity_and_allows_unlocked_exploration():
+    locked = _option("A11+A12+A13", 0, "FULL", "Chosen Faculty")
+    locked.offeringId = "locked-combined"
+    locked.venue = "AB02-119"
+    locked.building = "AB02"
+    alternate = _option("B11", 20, "AVAILABLE", "Other Faculty")
+    alternate.offeringId = "locked-alternate"
+    unlocked_a = _option("C11", 20, "AVAILABLE", "Flexible A")
+    unlocked_a.offeringId = "free-a"
+    unlocked_b = _option("D11", 20, "AVAILABLE", "Flexible B")
+    unlocked_b.offeringId = "free-b"
+    subjects = [_subject("CSE1001", locked, alternate), _subject("MAT1001", unlocked_a, unlocked_b)]
+    result = optimize(OptimizeInput(subjects=subjects, preferences=PreferencesInput(
+        mode="PLANNING", selectedOfferings={"CSE1001": "locked-combined"}), topN=10))
+    assert result.selectionValid is True
+    assert result.timetables
+    assert {tt.courses[0].offeringId for tt in result.timetables} == {"locked-combined"}
+    assert {tt.courses[0].facultyName for tt in result.timetables} == {"Chosen Faculty"}
+    assert {tt.courses[0].slot for tt in result.timetables} == {"A11+A12+A13"}
+    assert {tuple(tt.courses[0].slots) for tt in result.timetables} == {("A11", "A12", "A13")}
+    assert {tt.courses[0].venue for tt in result.timetables} == {"AB02-119"}
+    assert {tt.courses[1].offeringId for tt in result.timetables} == {"free-a", "free-b"}
+
+
+@pytest.mark.parametrize(
+    ("name", "locked_slot", "flexible_slots", "preferences", "top_flexible_id"),
+    [
+        ("morning", "A14+B14", ("A11", "A21"), {"timePreference": "morning"}, "flex-0"),
+        ("evening", "A14+B14", ("B11", "A21"), {"timePreference": "evening"}, "flex-1"),
+        ("preferred day off", "A14+B14", ("A13", "D11"), {"preferredFreeDay": "FRI"}, "flex-1"),
+        ("maximum gap", "A11", ("B11", "C11"), {"maxGap": 0}, "flex-0"),
+        ("lunch", "C11+C12", ("A21", "D21"), {"mandatoryLunch": True}, "flex-1"),
+        ("Day Scholar routine", "A14+B14", ("A11", "C21"), {"dayScholar": True}, "flex-0"),
+    ],
+    ids=lambda value: value if isinstance(value, str) else None,
+)
+def test_explicit_offering_lock_survives_each_soft_preference(name, locked_slot, flexible_slots, preferences, top_flexible_id):
+    locked = _option(locked_slot, 10, "AVAILABLE", "Locked Faculty")
+    locked.offeringId = "locked-offering"
+    locked.venue = "AB02-119"
+    flexible = [
+        _option(slot, 10, "AVAILABLE", f"Flexible Faculty {index}")
+        for index, slot in enumerate(flexible_slots)
+    ]
+    for index, option in enumerate(flexible):
+        option.offeringId = f"flex-{index}"
+    result = optimize(OptimizeInput(
+        subjects=[_subject("CSE1001", locked), _subject("MAT1001", *flexible)],
+        preferences=PreferencesInput(mode="PLANNING", selectedOfferings={"CSE1001": "locked-offering"}, **preferences),
+        topN=20,
+    ))
+
+    assert result.timetables, name
+    assert result.timetables[0].courses[1].offeringId == top_flexible_id, f"{name} preference should still rank unlocked choices"
+    assert {tt.courses[0].offeringId for tt in result.timetables} == {"locked-offering"}
+    assert {tt.courses[0].facultyName for tt in result.timetables} == {"Locked Faculty"}
+    assert {tt.courses[0].slot for tt in result.timetables} == {locked_slot}
+    assert {tuple(tt.courses[0].slots) for tt in result.timetables} == {tuple(locked_slot.split("+"))}
+    assert {tt.courses[0].venue for tt in result.timetables} == {"AB02-119"}
+    assert {tt.courses[1].offeringId for tt in result.timetables} == {option.offeringId for option in flexible}
+
+
+def test_ineligible_partial_lock_error_only_identifies_the_locked_course():
+    locked = _option("A11", 0, "FULL", "Chosen Faculty")
+    locked.offeringId = "locked-full"
+    unavailable_unlocked = _option("XYZ99", 10, "AVAILABLE", "Unverified Faculty", "CONTAINS_UNVERIFIED")
+    result = optimize(OptimizeInput(
+        subjects=[_subject("CSE1001", locked), _subject("MAT1001", unavailable_unlocked)],
+        preferences=PreferencesInput(mode="LIVE_REGISTRATION", selectedOfferings={"CSE1001": "locked-full"}),
+    ))
+    assert result.timetables == []
+    assert result.selectionErrors == [{"courseCode": "CSE1001", "reason": "OFFERING_NOT_ELIGIBLE"}]
+    assert {item["courseCode"] for item in result.excludedOfferings} == {"CSE1001", "MAT1001"}
+
+
+def test_locked_offering_is_not_substituted_when_seat_mode_excludes_it():
+    full = _option("A11", 0, "FULL", "Chosen Faculty")
+    full.offeringId = "locked-full"
+    available = _option("B11", 10, "AVAILABLE", "Other Faculty")
+    available.offeringId = "available-substitute"
+    subject = _subject("CSE1001", full, available)
+    planning = optimize(OptimizeInput(subjects=[subject], preferences=PreferencesInput(
+        mode="PLANNING", selectedOfferings={"CSE1001": "locked-full"})))
+    live = optimize(OptimizeInput(subjects=[subject], preferences=PreferencesInput(
+        mode="LIVE_REGISTRATION", selectedOfferings={"CSE1001": "locked-full"})))
+    assert planning.timetables[0].courses[0].offeringId == "locked-full"
+    assert live.timetables == []
+    assert live.selectionValid is False
 
 
 def test_student_selection_rejects_duplicate_ids_and_missing_faculty():
@@ -142,6 +233,26 @@ def test_selected_unknown_seats_follow_registration_mode():
     assert planning.selectionValid is True
     assert live.selectionValid is False
     assert live.selectionErrors[0]["reason"] == "OFFERING_NOT_ELIGIBLE"
+
+
+def test_final_validator_rejects_locked_offering_identity_and_metadata_substitution():
+    chosen = _option("A11+A12", 10, "AVAILABLE", "Chosen Faculty")
+    chosen.offeringId = "locked"
+    alternate = _option("B11", 10, "AVAILABLE", "Other Faculty")
+    alternate.offeringId = "other"
+    inp = OptimizeInput(subjects=[_subject("CSE1001", chosen, alternate)], preferences=PreferencesInput(
+        mode="PLANNING", selectedOfferings={"CSE1001": "locked"}))
+    valid = optimize(inp).timetables[0]
+    assert _schedule_final_valid(valid, inp)
+    valid.courses[0].offeringId = "other"
+    assert not _schedule_final_valid(valid, inp)
+    substituted = optimize(inp).timetables[0]
+    substituted.courses[0].facultyName = "Other Faculty"
+    assert not _schedule_final_valid(substituted, inp)
+    inp.preferences.selectedOfferings = {"UNKNOWN": "locked"}
+    unlocked_result = optimize(OptimizeInput(subjects=inp.subjects,
+        preferences=PreferencesInput(mode="PLANNING")))
+    assert not _schedule_final_valid(unlocked_result.timetables[0], inp)
 
 
 def test_student_faculty_change_is_revalidated_for_slot_clash():

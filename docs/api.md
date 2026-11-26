@@ -63,7 +63,7 @@ Validates and normalises the JSON array extracted from VTOP by the browser exten
 
 #### Student-selected offerings
 
-`POST /optimize` also accepts an optional `preferences.selectedOfferings` map keyed by course code. Each value must be the exact `offeringId` from the parsed subject options. The parser preserves an imported ID or generates the extension's canonical composite identity when the import has none. Supplying the map requires one choice for every subject; selected offerings are then checked by the normal slot and seat validation.
+`POST /optimize` also accepts an optional `preferences.selectedOfferings` map keyed by course code. Each supplied value must be the exact `offeringId` from the parsed subject options. The parser preserves an imported ID or generates the extension's canonical composite identity when the import has none. A supplied entry locks that course to the exact offering while courses omitted from the map remain available for timetable alternatives. Omit the map (or send an empty map) to explore all offerings. Every locked offering is checked by the normal slot and seat validation; it is never silently replaced if it is ineligible. The frontend's complete-timetable validation and save operation still require one selection for every requested course.
 
 ```json
 {
@@ -76,7 +76,7 @@ Validates and normalises the JSON array extracted from VTOP by the browser exten
 }
 ```
 
-The response adds `selectionValid`, `selectionErrors`, and `selectionConflicts`. Invalid IDs, missing choices, and ineligible selections return structured errors. A conflict includes both course codes, offering IDs, conflicting atomic slots, and `reason: "SLOT_CLASH"`. A valid selected timetable returns the selected offering ID and metadata with each course. Omitting `selectedOfferings` retains the existing behavior of returning schedule alternatives.
+The response adds `selectionValid`, `selectionErrors`, and `selectionConflicts`. Unknown/ambiguous IDs and ineligible locked offerings return structured errors. A conflict includes both course codes, offering IDs, conflicting atomic slots, and `reason: "SLOT_CLASH"`. Each returned timetable preserves the exact identity and metadata of every locked offering, while unlocked courses can vary across alternatives.
 
 ## Optimize
 
